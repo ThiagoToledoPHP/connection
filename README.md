@@ -36,24 +36,37 @@ It has tests in [PHPUnit](https://phpunit.de/), treatment with different version
             
             try{
             
-                //Set a connections strings and set the Exception mode for errors
+                //Set the Exception mode for errors
                 $connection = new Connection("DbHost","DbName","DbUser","DbPass",true);
                                 
         //...
     
     ```
     
-**Example 3 - Friendly print error**
+**Example 3 - Friendly print error stop the application**
  
     ```php
     
         //...
-            //Set a connections strings and set the Print mode for errors (including backtrace \º/ \º/ )
+            //Set the Print mode stop for errors (including backtrace \º/ \º/ )
             $connection = new Connection("DbHost","DbUser","DbPass","DbName",false,true);
                             
         //...
     
     ```    
+
+**Example 4 - Friendly print error don't stop the application**
+ 
+    ```php
+    
+        //...
+            //Print mode for errors don't stop the application (backtrace too \º/ \º/ )
+            $connection = new Connection("DbHost","DbUser","DbPass","DbName",false,true,false);
+                            
+        //...
+    
+    ```    
+    
     
 **Notice**
   
