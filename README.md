@@ -1,7 +1,7 @@
 # Connection Class
 PHP Class for connection to MySql database using mysqli.
 
-It has tests in [PHPUnit], treatment with different versions of PHP, exception handling and custom output errors to Debug.
+It has tests in [PHPUnit](https://phpunit.de/), treatment with different versions of PHP, exception handling and custom output errors to Debug.
 
 
 **Example 1 - Silent mode:**
