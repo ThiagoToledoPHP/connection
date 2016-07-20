@@ -55,10 +55,14 @@ It has tests in [PHPUnit](https://phpunit.de/), treatment with different version
     
     ```    
     
-_Notice: I created this class to study [Composer] , [Packagist] , [TDD] with [PHPUnit] , [PSR] , [MySQLi] and [Continuous Integration] .
+**Notice**
+  
+_I created this class to study [Composer] , [Packagist] , [TDD] with [PHPUnit] , [PSR] , [MySQLi] and [Continuous Integration] .
         In its initial version use for only for studies._
-        
+      
 **References**
+
+Important references to you understand and study this project:
         
 [PHP Class] <http://php.net/manual/pt_BR/language.oop5.php>
 
