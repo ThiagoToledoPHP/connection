@@ -1,0 +1,5 @@
+vendor/
+composer.lock
+.idea/
+.travis.yml
+composer.phar

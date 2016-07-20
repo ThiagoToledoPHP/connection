@@ -1,0 +1,21 @@
+{
+	"name": "thiagotoledo/connection",
+	"description": "PHP Class for connection to MySql database using mysqli functions. It has tests in PHPUnit of the main methods, treatment with different versions of PHP, exception handling and custom output errors to Debug .",
+	"authors": [
+		{
+			"name": "Thiago Toledo",
+			"email": "javaephp@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=5.3.17"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "4.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Toledo\\": "lib/"
+		}
+	}
+}
