@@ -1,6 +1,6 @@
 <?php
 
-include_once("lib\Helpers\Connection.php");
+@include_once("lib\Helpers\Connection.php");
 include_once("tests\ConfigTest.php");
 
 
@@ -15,7 +15,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
 
         //Create test table
         $sql = "
-        CREATE TABLE 'client' 
+        CREATE TABLE 'client' IF NOT EXISTS
             (
                 'id' integer (11) NOT NULL AUTO_INCREMENT , 
                 'nome' varchar (255),

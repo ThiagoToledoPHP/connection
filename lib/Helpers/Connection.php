@@ -78,9 +78,9 @@
 		public function setConnection($dbHost, $dbName, $dbUser, $dbPass, $generateException = false, $printErrorMsg = false, $stopOnPrintErrorMsg = true){
 
 		    $this->dbHost = $dbHost;
-            $this->dbUser = $dbName;
-            $this->dbPass = $dbUser;
-            $this->dbName = $dbPass;
+            $this->dbUser = $dbUser;
+            $this->dbPass = $dbPass;
+            $this->dbName = $dbName;
 
             $this->generateException = $generateException;
             $this->printErrorMsg = $printErrorMsg;
