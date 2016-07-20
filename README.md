@@ -1,4 +1,4 @@
-# Connection Class
+# Connection Class  [![Build Status](https://travis-ci.org/ThiagoToledoPHP/Connection.svg?branch=master)](https://travis-ci.org/ThiagoToledoPHP/Connection)
 [PHP Class](http://php.net/manual/pt_BR/language.oop5.php) for connection and use [MySql](https://www.mysql.com/) database using [mysqli](http://php.net/manual/pt_BR/book.mysqli.php).
 
 It has tests in [PHPUnit](https://phpunit.de/), treatment with different versions of PHP, exception handling and custom output errors to Debug.
