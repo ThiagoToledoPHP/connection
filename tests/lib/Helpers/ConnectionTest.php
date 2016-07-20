@@ -8,13 +8,8 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
 
 	protected $obj = NULL;
 
-    public function __construct($name, array $data, $dataName)
-    {
-        parent::__construct($name, $data, $dataName);
-        $this->setUp();
-    }
 
-    protected function setUp() {
+	protected function testSetUp() {
 
 	    $this->obj = new Toledo\Helpers\Connection(VALID_HOST_BD,VALID_NAME_BD,VALID_USER_BD,VALID_PASS_BD);
         $this->obj->start();
