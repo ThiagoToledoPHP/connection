@@ -14,13 +14,12 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
 	    $this->obj = new Toledo\Helpers\Connection(VALID_HOST_BD,VALID_NAME_BD,VALID_USER_BD,VALID_PASS_BD);
         $this->obj->start();
 
-        //Create test table
         $sql = "
-        CREATE TABLE 'client' IF NOT EXISTS
+        CREATE TABLE IF NOT EXISTS client
             (
-                'id' integer (11) NOT NULL AUTO_INCREMENT , 
-                'nome' varchar (255),
-                PRIMARY KEY ('id')
+                id INTEGER (11) NOT NULL AUTO_INCREMENT , 
+                nome varchar (255),
+                PRIMARY KEY (id)
             )
         ";
 
