@@ -24,7 +24,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
             )
         ";
 
-        $this->assertEquals($this->obj->executeQuery($sql));
+        $this->assertEquals($this->obj->executeQuery($sql),true);
         $this->obj->stop();
 
 	}
