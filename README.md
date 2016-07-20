@@ -15,7 +15,7 @@ It has tests in [PHPUnit](https://phpunit.de/), treatment with different version
             $connection->start();
             
             //Execute a Query
-            $connection->executeQuery("Select * from cliente");
+            $connection->executeQuery("Select * from client");
             
             //Fecth a array of objects
             $ResultSetFetchArrayObjects = $connection->getResultSetFetchArrayObjects();
