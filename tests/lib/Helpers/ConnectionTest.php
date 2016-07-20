@@ -7,8 +7,14 @@ include_once("tests\ConfigTest.php");
 class ConnectionTest extends PHPUnit_Framework_TestCase {
 
 	protected $obj = NULL;
-	
-	protected function setUp() {
+
+    public function __construct($name, array $data, $dataName)
+    {
+        parent::__construct($name, $data, $dataName);
+        $this->setUp();
+    }
+
+    protected function setUp() {
 
 	    $this->obj = new Toledo\Helpers\Connection(VALID_HOST_BD,VALID_NAME_BD,VALID_USER_BD,VALID_PASS_BD);
         $this->obj->start();
