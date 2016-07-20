@@ -1,13 +1,13 @@
 # Connection Class
 PHP Class for connection to MySql database using mysqli.
 
-It has tests in PHPUnit (Main methods), treatment with different versions of PHP, exception handling and custom output errors to Debug.
+It has tests in [PHPUnit] (Main methods), treatment with different versions of PHP, exception handling and custom output errors to Debug.
 
 
 **Example 1 - Silent mode:**
     
         //Set a connections strings host, user, pass and DBname and set the Silent mode for errors
-        $connection = new Connection("DbHost","DbUser","DbPass","DbName");
+        $connection = new Connection("DbHost","DbName","DbUser","DbPass");
         
         //Start a connection
         $connection->start();
@@ -32,7 +32,7 @@ It has tests in PHPUnit (Main methods), treatment with different versions of PHP
         try{
         
             //Set a connections strings and set the Exception mode for errors
-            $connection = new Connection("DbHost","DbUser","DbPass","DbName",true);
+            $connection = new Connection("DbHost","DbName","DbUser","DbPass",true);
                             
     //...
     
@@ -44,5 +44,19 @@ It has tests in PHPUnit (Main methods), treatment with different versions of PHP
                         
     //...
     
-_Notice: I created this class to study on Composer , Packagist , TDD with PHPUnit , PSR , MySQLi and Continuous Integration .
+_Notice: I created this class to study [Composer] , [Packagist] , [TDD] with [PHPUnit] , [PSR] , [MySQLi] and [Continuous Integration] .
         In its initial version use for only for studies._
+        
+[PHPUnit] <https://phpunit.de/>
+
+[Composer] <https://getcomposer.org/>
+
+[PSR] <http://www.php-fig.org/psr/>
+
+[Packagist] <https://packagist.org/>
+
+[MySQLi] <http://php.net/manual/pt_BR/book.mysqli.php>
+
+[Continuous Integration] <https://en.wikipedia.org/wiki/Continuous_integration>
+
+[TDD] <https://pt.wikipedia.org/wiki/Test_Driven_Development>
