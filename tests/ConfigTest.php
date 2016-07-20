@@ -8,9 +8,9 @@
     define("INVALID_PASS_BD","");
     define("INVALID_NAME_BD","");
 
-    define("VALID_HOST_BD","localhost");
-    define("VALID_USER_BD","");
+    define("VALID_HOST_BD","127.0.0.1");
+    define("VALID_USER_BD","travis");
     define("VALID_PASS_BD","");
-    define("VALID_NAME_BD","test");
+    define("VALID_NAME_BD","connection_test");
 
 ?>
