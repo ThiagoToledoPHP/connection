@@ -48,19 +48,23 @@ It has tests in [PHPUnit](https://phpunit.de/), treatment with different version
     
 **Example 3 - Friendly print error stop the application**
  
-    ```php
+``` php
+<?php    
+     
+    //...
     
-        //...
-            //Set the Print mode stop for errors (including backtrace \º/ \º/ )
-            $connection = new Connection("DbHost","DbUser","DbPass","DbName",false,true);
-                            
-        //...
+        //Set the Print mode stop for errors (including backtrace \º/ \º/ )
+        $connection = new Connection("DbHost","DbUser","DbPass","DbName",false,true);
+                        
+    //...
     
-    ```    
+?>
+```    
 
 **Example 4 - Friendly print error don't stop the application**
  
-    ```php
+``` php
+<?php
     
         //...
             //Print mode for errors don't stop the application (backtrace too \º/ \º/ )
@@ -68,7 +72,8 @@ It has tests in [PHPUnit](https://phpunit.de/), treatment with different version
                             
         //...
     
-    ```    
+?>
+```
     
 ###Instalation
 
