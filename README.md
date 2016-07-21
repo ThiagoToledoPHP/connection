@@ -33,18 +33,18 @@ It has tests in [PHPUnit](https://phpunit.de/), treatment with different version
 
 **Example 2 - Exception mode (create a exception in errors):**
 
-    ```php
+``` php
+<?php            
     
-        //...
-            
-            try{
-            
-                //Set the Exception mode for errors
-                $connection = new Connection("DbHost","DbName","DbUser","DbPass",true);
-                                
-        //...
+    try{
     
-    ```
+        //Set the Exception mode for errors
+        $connection = new Connection("DbHost","DbName","DbUser","DbPass",true);
+                        
+    //...
+    
+?>
+```
     
 **Example 3 - Friendly print error stop the application**
  
