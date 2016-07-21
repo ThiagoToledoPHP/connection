@@ -67,7 +67,7 @@ It has tests in [PHPUnit](https://phpunit.de/), treatment with different version
     
     ```    
     
-**Instalation**
+###Instalation
 
 I recommend you use the composer for this (Yes, this project have a [Packagist Page](https://packagist.org/packages/thiagotoledo/connection) ).
 
@@ -75,12 +75,12 @@ Using compose:
 
 `composer require thiagotoledo/connection`
     
-**Notice**
+###Notice
   
 _I created this class to study [Composer] , [Packagist] , [TDD] with [PHPUnit] , [PSR] , [MySQLi] and [Continuous Integration] .
         In its initial version use for only for studies._
       
-**References**
+###References
 
 Important references to you understand and study this project:
         
