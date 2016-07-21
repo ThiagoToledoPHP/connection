@@ -6,27 +6,30 @@ It has tests in [PHPUnit](https://phpunit.de/), treatment with different version
 
 **Example 1 - Silent mode:**
     
-        ```php
+``` php
+<?php
         
-            //Set a connections strings host, user, pass and DBname and set the Silent mode for errors
-            $connection = new Connection("DbHost","DbName","DbUser","DbPass");
-            
-            //Start a connection
-            $connection->start();
-            
-            //Execute a Query
-            $connection->executeQuery("Select * from client");
-            
-            //Fecth a array of objects
-            $ResultSetFetchArrayObjects = $connection->getResultSetFetchArrayObjects();
-            
-            //Stop the connection
-            $connection->stop();
-            
-            //Save errors to Log. Example of hipotetic Log class
-            $myLog->save($connection->getErrorMsg() . " - " . $connection->getErrorNumber());
-        
-        ```
+    //Set a connections strings host, user, pass and DBname and set the Silent mode for errors
+    $connection = new Connection("DbHost","DbName","DbUser","DbPass");
+    
+    //Start a connection
+    $connection->start();
+    
+    //Execute a Query
+    $connection->executeQuery("Select * from client");
+    
+    //Fecth a array of objects
+    $ResultSetFetchArrayObjects = $connection->getResultSetFetchArrayObjects();
+    
+    //Stop the connection
+    $connection->stop();
+    
+    //Save errors to Log. Example of hipotetic Log class
+    $myLog->save($connection->getErrorMsg() . " - " . $connection->getErrorNumber());
+
+
+?>
+```
 
 **Example 2 - Exception mode (create a exception in errors):**
 
