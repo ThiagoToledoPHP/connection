@@ -67,6 +67,13 @@ It has tests in [PHPUnit](https://phpunit.de/), treatment with different version
     
     ```    
     
+**Instalation**
+
+I recommend you use the composer for this (Yes, this project have a [Packagist Page](https://packagist.org/packages/thiagotoledo/connection) ).
+
+Using compose:
+
+`composer require thiagotoledo/connection`
     
 **Notice**
   
