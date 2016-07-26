@@ -64,6 +64,14 @@
             return $this->isConnected;
         }
 
+        /**
+         * Return a escape string with mysqli escapes tring
+         * @return string
+         */
+        public function getEscapeString($string){
+            return $this->mysqliObject->real_escape_string($string);
+        }
+
 
         /**
          * Set the connection, if you need
