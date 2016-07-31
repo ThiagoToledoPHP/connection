@@ -1,6 +1,6 @@
 {
 	"name": "thiagotoledo/connection",
-	"description": "PHP Class for connection to MySql database using mysqli functions. It has tests in PHPUnit of the main methods, treatment with different versions of PHP, exception handling and custom output errors to Debug .",
+	"description": "PHP Class for connection to MySql database using mysqli functions.It has tests in PHPUnit of the main methods, treatment with different versions of PHP, exception handling and custom output errors to Debug .",
 	"authors": [
 		{
 			"name": "Thiago Toledo",
