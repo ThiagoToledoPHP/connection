@@ -6,7 +6,7 @@
     /**
      * Class Connection
      * Use to start, stop and execute a query in MySql Database.
-     * More information in:
+     * More information in: https://github.com/ThiagoToledoPHP/Connection
      * @author Thiago Toledo <javaephp@gmail.com>
      */
 	class Connection {
