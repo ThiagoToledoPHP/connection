@@ -65,7 +65,8 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * @expectedException Exception
              */
             public function testConnectionStartErrorExceptionActive(){
-                $this->obj = new Toledo\Helpers\Connection(INVALID_HOST_BD,INVALID_NAME_BD,INVALID_USER_BD,INVALID_PASS_BD,true);
+                $this->obj = new Toledo\Helpers\Connection(INVALID_HOST_BD,INVALID_NAME_BD,INVALID_USER_BD,INVALID_PASS_BD);
+                $this->obj->setGenerateException(true);
                 $this->obj->start();
             }
 
@@ -74,7 +75,8 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * Test the method using valid information for database
              */
             public function testConnectionStartValidExceptionActive(){
-                $this->obj = new Toledo\Helpers\Connection(VALID_HOST_BD,VALID_NAME_BD,VALID_USER_BD,VALID_PASS_BD,true);
+                $this->obj = new Toledo\Helpers\Connection(VALID_HOST_BD,VALID_NAME_BD,VALID_USER_BD,VALID_PASS_BD);
+                $this->obj->setGenerateException(true);
                 $this->assertEquals($this->obj->start(),true);
             }
 
@@ -107,7 +109,8 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * @expectedException Exception
              */
             public function testConnectionStopErrorExceptionActive(){
-                $this->obj = new Toledo\Helpers\Connection(INVALID_HOST_BD,INVALID_NAME_BD,INVALID_USER_BD,INVALID_PASS_BD,true);
+                $this->obj = new Toledo\Helpers\Connection(INVALID_HOST_BD,INVALID_NAME_BD,INVALID_USER_BD,INVALID_PASS_BD);
+                $this->obj->setGenerateException(true);
                 $this->obj->stop();
             }
 
@@ -115,7 +118,8 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * Test the method using valid information for database
              */
             public function testConnectionStopValidExceptionActive(){
-                $this->obj = new Toledo\Helpers\Connection(VALID_HOST_BD,VALID_NAME_BD,VALID_USER_BD,VALID_PASS_BD,true);
+                $this->obj = new Toledo\Helpers\Connection(VALID_HOST_BD,VALID_NAME_BD,VALID_USER_BD,VALID_PASS_BD);
+                $this->obj->setGenerateException(true);
                 $this->obj->start();
                 $this->assertEquals($this->obj->stop(),true);
             }
