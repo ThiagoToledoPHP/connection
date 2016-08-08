@@ -1,4 +1,4 @@
-# Connection Class  [![Build Status](https://travis-ci.org/ThiagoToledoPHP/Connection.svg?branch=master)](https://travis-ci.org/ThiagoToledoPHP/Connection)  [![Coverage Status](https://coveralls.io/repos/github/ThiagoToledoPHP/Connection/badge.svg?branch=master)](https://coveralls.io/github/ThiagoToledoPHP/Connection?branch=master)  [![Code Climate](https://codeclimate.com/github/ThiagoToledoPHP/Connection/badges/gpa.svg)](https://codeclimate.com/github/ThiagoToledoPHP/Connection)
+# Connection Class  [![Build Status](https://travis-ci.org/ThiagoToledoPHP/Connection.svg?branch=master)](https://travis-ci.org/ThiagoToledoPHP/Connection)  [![Code Climate](https://codeclimate.com/github/ThiagoToledoPHP/Connection/badges/gpa.svg)](https://codeclimate.com/github/ThiagoToledoPHP/Connection)
 [PHP Class](http://php.net/manual/pt_BR/language.oop5.php) for connection and use [MySql](https://www.mysql.com/) database using [mysqli](http://php.net/manual/pt_BR/book.mysqli.php).
 
 It has tests in [PHPUnit](https://phpunit.de/), treatment with different versions of PHP, exception handling and custom output errors to Debug.
@@ -39,41 +39,14 @@ It has tests in [PHPUnit](https://phpunit.de/), treatment with different version
     try{
     
         //Set the Exception mode for errors
-        $connection = new Connection("DbHost","DbName","DbUser","DbPass",true);
+        $connection = new Connection("DbHost","DbName","DbUser","DbPass");
+        $connection->setGenerateException(true);
                         
     //...
     
 ?>
 ```
-    
-**Example 3 - Friendly print error stop the application**
- 
-``` php
-<?php    
-     
-    //...
-    
-        //Set the Print mode stop for errors (including backtrace \º/ \º/ )
-        $connection = new Connection("DbHost","DbUser","DbPass","DbName",false,true);
-                        
-    //...
-    
-?>
-```    
-
-**Example 4 - Friendly print error don't stop the application**
- 
-``` php
-<?php
-    
-        //...
-            //Print mode for errors don't stop the application (backtrace too \º/ \º/ )
-            $connection = new Connection("DbHost","DbUser","DbPass","DbName",false,true,false);
-                            
-        //...
-    
-?>
-```
+   
     
 ###Instalation
 
