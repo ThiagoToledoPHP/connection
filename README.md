@@ -61,7 +61,7 @@ Using in compose replace "versionNumber" for your prefered release ([See the rel
         "thiagotoledo/connection": "versionNumber"
     }
 }
-...
+```
     
 ###Notice
   
