@@ -25,7 +25,7 @@ It has tests in [PHPUnit](https://phpunit.de/), treatment with different version
     $connection->stop();
     
     //Save errors to Log. Example of hipotetic Log class
-    $myLog->save($connection->getErrorMsg() . " - " . $connection->getErrorNumber());
+    $myLog->save($connection->getErrorMsg() . " - " . $connection->getErrorCode());
 
 
 ?>
