@@ -52,7 +52,7 @@ It has tests in [PHPUnit](https://phpunit.de/), treatment with different version
 
 I recommend you use the composer for this (Yes, this project have a [Packagist Page](https://packagist.org/packages/thiagotoledo/connection) ).
 
-Using in compose replace "versionNumber" for your prefered release ([See the releases](https://github.com/ThiagoToledoPHP/Connection/releases)) :
+Using in your [composer.json](https://getcomposer.org/doc/01-basic-usage.md#composer-json-project-setup) replace "versionNumber" for your prefered release ([See the releases](https://github.com/ThiagoToledoPHP/Connection/releases)) :
 
 
 ``` javascript
