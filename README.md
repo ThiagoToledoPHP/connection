@@ -4,7 +4,7 @@
 It has tests in [PHPUnit](https://phpunit.de/), treatment with different versions of PHP and exception handling.
 
 To check the quality of the source code of the class, was introduced to the service configuration [Code climate]( https://codeclimate.com ) to the project .
-The code is checked by the project [PHP Mess Detector](https://phpmd.org/) further increasing the reliability of the class.
+The code is checked by the project [PHP Mess Detector](https://phpmd.org/), [PHP Code Sniffer](http://pear.php.net/package/PHP_CodeSniffer) using [PSR1](http://www.php-fig.org/psr/psr-1/) and [PSR2](http://www.php-fig.org/psr/psr-2/) Standards further increasing the reliability of the class.
 
 
 **Example 1 - Silent mode:**
@@ -83,8 +83,6 @@ Important references to you understand and study this project:
 
 [Composer] <https://getcomposer.org/>
 
-[PSR] <http://www.php-fig.org/psr/>
-
 [Packagist] <https://packagist.org/>
 
 [MySQLi] <http://php.net/manual/pt_BR/book.mysqli.php>
@@ -94,3 +92,11 @@ Important references to you understand and study this project:
 [TDD] <https://pt.wikipedia.org/wiki/Test_Driven_Development>
 
 [PHP Mess Detector] <https://phpmd.org/>
+
+[PHP Code Sniffer] <http://pear.php.net/package/PHP_CodeSniffer>
+
+[PSR] <http://www.php-fig.org/psr/>
+
+[PSR1] <http://www.php-fig.org/psr/psr-1/>
+
+[PSR2] <http://www.php-fig.org/psr/psr-2/>
