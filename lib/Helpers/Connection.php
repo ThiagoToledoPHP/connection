@@ -172,10 +172,10 @@
 
                 return false;
 
-            }else {
-                $this->mysqliObject->close();
-                $this->isConnected = false;
             }
+
+            $this->mysqliObject->close();
+            $this->isConnected = false;
 
             return true;
 
