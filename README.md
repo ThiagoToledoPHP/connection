@@ -52,9 +52,16 @@ It has tests in [PHPUnit](https://phpunit.de/), treatment with different version
 
 I recommend you use the composer for this (Yes, this project have a [Packagist Page](https://packagist.org/packages/thiagotoledo/connection) ).
 
-Using compose:
+Using in compose replace "versionNumber" for your prefered version (See the versions) :
 
-`composer require thiagotoledo/connection`
+
+``` javascript
+{
+    "require": {
+        "thiagotoledo/connection": "versionNumber"
+    }
+}
+...
     
 ###Notice
   
