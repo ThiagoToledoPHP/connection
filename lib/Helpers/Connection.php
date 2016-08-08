@@ -60,7 +60,7 @@
          * Return a true, if connected
          * @return boolean
          */
-        public function getIsConnected(){
+        public function isConnected(){
             return $this->isConnected;
         }
 
@@ -132,22 +132,22 @@
 
                     $returnString .=  "</p>";
 
-                    $debug_backtrace = debug_backtrace();
+                    $debugBacktrace = debug_backtrace();
 
-                    if(is_array($debug_backtrace)){
+                    if(is_array($debugBacktrace)){
 
-                        $debug_backtrace = array_reverse($debug_backtrace);
+                        $debugBacktrace = array_reverse($debugBacktrace);
 
                         $returnString .=  "<ul>";
 
-                        foreach ($debug_backtrace as $backtrace_element){
+                        foreach ($debugBacktrace as $backtraceElement){
 
                             $returnString .=
                                 "<li>" .
-                                    "<b>File: </b>"     . $backtrace_element["file"]        . "<br>".
-                                    "<b>Line: </b>"     . $backtrace_element["line"]        . "<br>".
-                                    "<b>Function: </b>" . $backtrace_element["function"]    . "<br>".
-                                    "<b>Class: </b>"    . $backtrace_element["class"]       . "<br>".
+                                    "<b>File: </b>"     . $backtraceElement["file"]        . "<br>".
+                                    "<b>Line: </b>"     . $backtraceElement["line"]        . "<br>".
+                                    "<b>Function: </b>" . $backtraceElement["function"]    . "<br>".
+                                    "<b>Class: </b>"    . $backtraceElement["class"]       . "<br>".
                                 "</li>";
                         }
 
