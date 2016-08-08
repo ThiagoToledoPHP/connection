@@ -2,6 +2,7 @@
 [PHP Class](http://php.net/manual/pt_BR/language.oop5.php) for connection and use [MySql](https://www.mysql.com/) database using [mysqli](http://php.net/manual/pt_BR/book.mysqli.php).
 
 It has tests in [PHPUnit](https://phpunit.de/), treatment with different versions of PHP and exception handling.
+
 To check the quality of the source code of the class, was introduced to the service configuration [Code climate]( https://codeclimate.com ) to the project .
 The code is checked by the project [PHP Mess Detector](https://phpmd.org/) further increasing the reliability of the class.
 
