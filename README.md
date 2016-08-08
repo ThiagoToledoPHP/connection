@@ -10,7 +10,7 @@ It has tests in [PHPUnit](https://phpunit.de/), treatment with different version
 <?php
         
     //Set a connections strings host, user, pass and DBname and set the Silent mode for errors
-    $connection = new Connection("DbHost","DbName","DbUser","DbPass");
+    $connection = new Toledo\Helpers\Connection("DbHost","DbName","DbUser","DbPass");
     
     //Start a connection
     $connection->start();
@@ -39,7 +39,7 @@ It has tests in [PHPUnit](https://phpunit.de/), treatment with different version
     try{
     
         //Set the Exception mode for errors
-        $connection = new Connection("DbHost","DbName","DbUser","DbPass");
+        $connection = new Toledo\Helpers\Connection("DbHost","DbName","DbUser","DbPass");
         $connection->setGenerateException(true);
                         
     //...
