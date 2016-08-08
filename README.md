@@ -1,7 +1,7 @@
 # Connection Class  [![Build Status](https://travis-ci.org/ThiagoToledoPHP/Connection.svg?branch=master)](https://travis-ci.org/ThiagoToledoPHP/Connection)  [![Code Climate](https://codeclimate.com/github/ThiagoToledoPHP/Connection/badges/gpa.svg)](https://codeclimate.com/github/ThiagoToledoPHP/Connection)
 [PHP Class](http://php.net/manual/pt_BR/language.oop5.php) for connection and use [MySql](https://www.mysql.com/) database using [mysqli](http://php.net/manual/pt_BR/book.mysqli.php).
 
-It has tests in [PHPUnit](https://phpunit.de/), treatment with different versions of PHP, exception handling and custom output errors to Debug.
+It has tests in [PHPUnit](https://phpunit.de/), treatment with different versions of PHP and exception handling.
 
 
 **Example 1 - Silent mode:**
