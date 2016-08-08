@@ -19,12 +19,10 @@
 		private $mysqliObject; //Mysql Object
         private $isConnected; //True if the connection start
         private $errorMsg;   //Save the error msg to create silent Logs, for example
-        private $errorNumber; //Save the error number
+        private $errorCode; //Save the error code
         private $resultSet; //Query's  ResultSet
 
-        private $printErrorMsg; //Print error for emergency debugs. For security of app, only show errors if this is true
         private $generateException; //If you prefer, the class can create one Exception to you use Try/Catch
-        private $stopOnPrintErrorMsg; //Die the execution, if print error msg is true.
 
         /**
          * Connection constructor.
@@ -32,12 +30,9 @@
          * @param string $dbName
          * @param string $dbUser
          * @param string $dbPass
-         * @param bool $generateException Set true to create an Exception
-         * @param bool $printErrorMsg If $generateException set false, create a friendly HTML print
-         * @param bool $stopOnPrintErrorMsg If $generateException set false, and $printErrorMsg set true, create a friendly HTML print don't stop the app execution
          */
-		public function __construct($dbHost, $dbName, $dbUser, $dbPass, $generateException = false, $printErrorMsg = false, $stopOnPrintErrorMsg = true ){
-		    $this->setConnection($dbHost, $dbName, $dbUser, $dbPass, $generateException, $printErrorMsg, $stopOnPrintErrorMsg);
+		public function __construct($dbHost, $dbName, $dbUser, $dbPass ){
+		    $this->setConnection($dbHost, $dbName, $dbUser, $dbPass);
 		}
 
         /**
@@ -48,12 +43,20 @@
             return $this->errorMsg;
         }
 
+        /*
+         * Set if the class generate or not exceptions
+         * @param boolean $generateException
+         */
+        public function setGenerateException($generateException){
+            $this->generateException = $generateException;
+        }
+
         /**
          * Return a error number, if exists.
          * @return string
          */
-        public function getErrorNumber(){
-            return $this->errorNumber;
+        public function getErrorCode(){
+            return $this->errorCode;
         }
 
         /**
@@ -79,22 +82,17 @@
          * @param string $dbName
          * @param string $dbUser
          * @param string $dbPass
-         * @param bool $generateException Set true to create an Exception
-         * @param bool $printErrorMsg If $generateException set false, create a friendly HTML print
-         * @param bool $stopOnPrintErrorMsg If $generateException set false, and $printErrorMsg set true, create a friendly HTML print don't stop the app execution
          */
-		public function setConnection($dbHost, $dbName, $dbUser, $dbPass, $generateException = false, $printErrorMsg = false, $stopOnPrintErrorMsg = true){
+		public function setConnection($dbHost, $dbName, $dbUser, $dbPass){
 
 		    $this->dbHost = $dbHost;
             $this->dbUser = $dbUser;
             $this->dbPass = $dbPass;
             $this->dbName = $dbName;
 
-            $this->generateException = $generateException;
-            $this->printErrorMsg = $printErrorMsg;
-            $this->stopOnPrintErrorMsg = $stopOnPrintErrorMsg;
+            $this->generateException = false; //Default
             $this->errorMsg = "";
-            $this->errorNumber = "";
+            $this->errorCode = "";
 
             $this->mysqliObject = null; //Null the local mysqliObject to begin
             $this->isConnected = false;
@@ -105,63 +103,17 @@
         /**
          * Create a custom error. Can create one exception, print and stop application
          * @param string $errorMsg
-         * @param string $errorNumber
-         * @param bool $generateException Set true to create an Exception
-         * @param bool $printErrorMsg If $generateException set false, create a friendly HTML print
-         * @param bool $stopOnPrintErrorMsg If $generateException set false, and $printErrorMsg set true, create a friendly HTML print don't stop the app execution
+         * @param string $errorCode
          * @throws Exception
          */
-        private function createCustomError($errorMsg, $errorNumber, $generateException = false, $printErrorMsg = false, $stopOnPrintErrorMsg = true){
+        private function createCustomError($errorMsg, $errorCode){
 
-            $returnString = "";
+            $this->errorMsg = $errorMsg;
+            $this->errorCode = $errorCode;
 
-            if($generateException === true){
+            if($this->generateException === true){
 
-                throw new Exception($errorMsg, $errorNumber);
-
-            }elseif ($printErrorMsg === true){
-
-
-                //I don't like use HTML internal in PHP code, but, to no need other files, temporary use in this way
-                $returnString .=  "<div class='connectionWarningBlock'>";
-
-                    $returnString .=  "<p>";
-
-                        $returnString .=  "<b>Error number:</b> ".$errorNumber."<br>";
-                        $returnString .=  "<b>Error message:</b> ".$errorMsg."";
-
-                    $returnString .=  "</p>";
-
-                    $debugBacktrace = debug_backtrace();
-
-                    if(is_array($debugBacktrace)){
-
-                        $debugBacktrace = array_reverse($debugBacktrace);
-
-                        $returnString .=  "<ul>";
-
-                        foreach ($debugBacktrace as $backtraceElement){
-
-                            $returnString .=
-                                "<li>" .
-                                    "<b>File: </b>"     . $backtraceElement["file"]        . "<br>".
-                                    "<b>Line: </b>"     . $backtraceElement["line"]        . "<br>".
-                                    "<b>Function: </b>" . $backtraceElement["function"]    . "<br>".
-                                    "<b>Class: </b>"    . $backtraceElement["class"]       . "<br>".
-                                "</li>";
-                        }
-
-                        $returnString .=  "</ul>";
-
-                    }
-
-                $returnString .= "</div>";
-
-                echo $returnString;
-
-                if($stopOnPrintErrorMsg === true){
-                    die();
-                }
+                throw new Exception($errorMsg, $errorCode);
 
             }
 
@@ -182,11 +134,9 @@
             if ($mysqli->connect_error) {
 
                 $this->isConnected = false;
-                $this->errorMsg = utf8_encode('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
-                $this->errorNumber = $mysqli->connect_errno;
-                $this->createCustomError($this->errorMsg,$this->errorNumber,$this->generateException,$this->printErrorMsg,$this->stopOnPrintErrorMsg);
+                $this->createCustomError(utf8_encode('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error),$mysqli->connect_errno);
 
-                return $this->isConnected; //Execute only if the execution not stop
+                return $this->isConnected;
 
             }
 
@@ -197,11 +147,9 @@
             if (mysqli_connect_error()) {
 
                 $this->isConnected = false;
-                $this->errorMsg = utf8_encode('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
-                $this->errorNumber = mysqli_connect_errno();
-                $this->createCustomError($this->errorMsg, $this->errorNumber,$this->generateException,$this->printErrorMsg,$this->stopOnPrintErrorMsg);
+                $this->createCustomError(utf8_encode('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error()), mysqli_connect_errno());
 
-                return $this->isConnected; //Execute only if the execution not stop
+                return $this->isConnected;
 
             }
 
@@ -219,11 +167,10 @@
 
             if($this->isConnected === false){
 
-                $this->errorNumber = "00001"; //All the number error of this class user 4 zeros in begin
-                $this->errorMsg = "Connection::stop error: No is possible close a connection if you no begin using Connection:start in sequence.";
-                $this->createCustomError($this->errorMsg, $this->errorNumber,$this->generateException,$this->printErrorMsg,$this->stopOnPrintErrorMsg);
+                //All the number error of this class user 4 zeros in begin
+                $this->createCustomError("Connection::stop error: No is possible close a connection if you no begin using Connection:start in sequence.", "00001");
 
-                return false; //Execute only if the execution not stop
+                return false;
 
             }else {
                 $this->mysqliObject->close();
@@ -243,27 +190,25 @@
 
             if($this->isConnected === false){
 
-                $this->errorNumber = "00002"; //All the number error of this class user 4 zeros in begin
-                $this->errorMsg = "Connection::executeQuery error: No is possible execute a query if you no begin using Connection:start in sequence.";
-                $this->createCustomError($this->errorMsg, $this->errorNumber,$this->generateException,$this->printErrorMsg,$this->stopOnPrintErrorMsg);
+                //All the number error of this class user 4 zeros in begin
+                $this->createCustomError("Connection::executeQuery error: No is possible execute a query if you no begin using Connection:start in sequence.", "00002");
 
-                return false; //Execute only if the execution not stop
-
-            }else {
-
-                    $this->resultSet = $this->mysqliObject->query($sql);
-
-                    if($this->resultSet === false){
-
-                        $this->errorMsg = utf8_encode('Connect Error (' . $this->mysqliObject->errno . ') ' . $this->mysqliObject->error);
-                        $this->errorNumber = $this->mysqliObject->errno;
-                        $this->createCustomError($this->errorMsg,$this->errorNumber,$this->generateException,$this->printErrorMsg,$this->stopOnPrintErrorMsg);
-
-                        return false;
-
-                    }
+                return false;
 
             }
+
+
+            $this->resultSet = $this->mysqliObject->query($sql);
+
+            if($this->resultSet === false){
+
+                $this->createCustomError(utf8_encode('Connect Error (' . $this->mysqliObject->errno . ') ' . $this->mysqliObject->error),$this->mysqliObject->errno);
+
+                return false;
+
+            }
+
+
 
             return true;
 
@@ -280,9 +225,8 @@
 
             if(is_null($this->resultSet)) {
 
-                $this->errorNumber = "00003"; //All the number error of this class user 4 zeros in begin
-                $this->errorMsg = "Connection::getResultSetFetchObject error: No is possible fetch a query if you no begin using Connection:executeQuery to 'SELECT query' in sequence.";
-                $this->createCustomError($this->errorMsg, $this->errorNumber, $this->generateException, $this->printErrorMsg, $this->stopOnPrintErrorMsg);
+                //All the number error of this class user 4 zeros in begin
+                $this->createCustomError("Connection::getResultSetFetchObject error: No is possible fetch a query if you no begin using Connection:executeQuery to 'SELECT query' in sequence.", "00003");
 
                 return false; //Execute only if the execution not stop
             }
