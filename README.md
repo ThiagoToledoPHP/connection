@@ -91,3 +91,5 @@ Important references to you understand and study this project:
 [Continuous Integration] <https://en.wikipedia.org/wiki/Continuous_integration>
 
 [TDD] <https://pt.wikipedia.org/wiki/Test_Driven_Development>
+
+[PHP Mess Detector] <https://phpmd.org/>
