@@ -155,7 +155,8 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * @expectedException Exception
              */
             public function testExecuteQueryErrorExceptionActive(){
-                $this->obj = new Toledo\Helpers\Connection(VALID_HOST_BD,VALID_NAME_BD,VALID_USER_BD,VALID_PASS_BD,true);
+                $this->obj = new Toledo\Helpers\Connection(VALID_HOST_BD,VALID_NAME_BD,VALID_USER_BD,VALID_PASS_BD);
+                $this->obj->setGenerateException(true);
                 $this->obj->start();
                 $this->obj->executeQuery("Select from error_table");
                 $this->obj->stop();
