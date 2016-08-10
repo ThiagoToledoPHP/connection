@@ -49,7 +49,42 @@ The code is checked by the project [PHP Mess Detector](https://phpmd.org/) and [
     
 ?>
 ```
-   
+
+**Example 3 - Prepared Statement (New alpha feature):**
+
+
+``` php
+<?php
+    
+    //Set a connections strings host, user, pass and DBname and set the Silent mode for errors
+    $connection = new Toledo\Helpers\Connection("DbHost","DbName","DbUser","DbPass");
+        
+    //Start a connection
+    $connection->start();
+
+    //SQL
+    $sql_prep = "SELECT * FROM client WHERE email = ? AND fullName = ? ";
+    
+    //Bind parameters. Types: s = String, i = Integer, d = Double,  B = Blob
+    $bind_params = "ss";
+     
+    //Bind values
+    $bind_values = array("javaephp@gmail.com","Thiago Toledo"); 
+
+    //Only one new method for Prepared
+    $connection->createPreparedStatement($sql_prep,$bind_params,$bind_values);
+    
+    //Execute a Query
+    $connection->executeQuery();
+
+    //Fecth a array of objects
+    $ResultSetFetchArrayObjects = $connection->getResultSetFetchArrayObjects();
+    
+    //Stop the connection
+    $connection->stop();
+
+?>
+```   
     
 ###Instalation
 
