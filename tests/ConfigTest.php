@@ -3,10 +3,10 @@
     //Configure test bd
     //Structure in test.sql
 
-    define("INVALID_HOST_BD","test");
-    define("INVALID_USER_BD","");
-    define("INVALID_PASS_BD","");
-    define("INVALID_NAME_BD","");
+    define("TEST_INVALID_HOST_BD","test");
+    define("TEST_INVALID_USER_BD","");
+    define("TEST_INVALID_PASS_BD","");
+    define("TEST_INVALID_NAME_BD","");
 
     define("VALID_HOST_BD","127.0.0.1");
     define("VALID_USER_BD","travis");

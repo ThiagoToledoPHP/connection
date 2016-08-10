@@ -28,6 +28,7 @@ class Connection
     private $resultSet; //Query's  ResultSet
 
     private $generateException; //If you prefer, the class can create one Exception to you use Try/Catch
+    private $preparedStatementObject; //internal prepared Statement object.
 
     /**
      * Connection constructor.
@@ -109,6 +110,7 @@ class Connection
         $this->mysqliObject = null; //Null the local mysqliObject to begin
         $this->isConnected = false;
         $this->resultSet = null;
+        $this->preparedStatementObject = null; //Internal Default
     }
 
     /**
@@ -126,6 +128,48 @@ class Connection
         if ($this->generateException === true) {
             throw new Exception($errorMsg, $errorCode);
         }
+    }
+
+    /**
+     * Create prepared Statement using mysqli.
+     * Types String using the mysqli reference: Type specification chars Table in
+     * http://php.net/manual/en/mysqli-stmt.bind-param.php
+     *
+     * @param string $query
+     * @param string $typesString
+     * @param array $valuesArray
+     */
+    public function createPreparedStatement($query, $typesString, $valuesArray)
+    {
+
+        $tempParamsArray = array();
+        $this->preparedStatementObject = $this->mysqliObject->stmt_init();
+
+        if ($this->preparedStatementObject->prepare($query) === false) {
+            $this->createCustomError(utf8_encode('Connect Error - Prepared Statement (' .
+                $this->preparedStatementObject->errno . ') ' .
+                $this->preparedStatementObject->error . ' - Wrong SQL: '
+                .$query), $this->preparedStatementObject->errno);
+
+            return false;
+        }
+
+        if (sizeof($valuesArray) == strlen($typesString)) {
+            $tempParamsArray[] = &$typesString;
+            for ($i = 0; $i < sizeof($valuesArray); $i++) {
+                $tempParamsArray[] = &$valuesArray[$i];
+            }
+
+
+            call_user_func_array(array($this->preparedStatementObject, 'bind_param'), $tempParamsArray);
+
+            return true;
+        }
+
+        $this->createCustomError("Connection::createPreparedStatement error: Is necessary equal numbers of elements
+        in valuesArray param and types string param. See more in readme file docs", "00005");
+
+        return false;
     }
 
     /**
@@ -181,6 +225,10 @@ class Connection
             return false;
         }
 
+        if (!is_null($this->preparedStatementObject)) {
+            $this->preparedStatementObject->close();
+        }
+
         $this->mysqliObject->close();
         $this->isConnected = false;
 
@@ -189,10 +237,10 @@ class Connection
 
     /**
      * Execute a query in Database. Return true in sucess
-     * @param $sql
+     * @param string $sql
      * @return bool
      */
-    public function executeQuery($sql)
+    public function executeQuery($sql = "")
     {
 
         if ($this->isConnected === false) {
@@ -203,19 +251,31 @@ class Connection
             return false;
         }
 
+        if (is_null($this->preparedStatementObject) || $sql !== "") {
+            $this->clearPreparedStatement();
+            $this->resultSet = $this->mysqliObject->query($sql);
 
-        $this->resultSet = $this->mysqliObject->query($sql);
+            if ($this->resultSet === false) {
+                $this->createCustomError(utf8_encode('Connect Error (' . $this->mysqliObject->errno . ') ' .
+                    $this->mysqliObject->error), $this->mysqliObject->errno);
 
-        if ($this->resultSet === false) {
-            $this->createCustomError(utf8_encode('Connect Error (' . $this->mysqliObject->errno . ') ' .
-                $this->mysqliObject->error), $this->mysqliObject->errno);
+                return false;
+            }
 
-            return false;
+            return true;
+        } else {
+            $this->resultSet = $this->preparedStatementObject->execute();
+
+            if ($this->resultSet === false) {
+                $this->createCustomError(utf8_encode('Connect Error - Prepared Statement (' .
+                    $this->preparedStatementObject->errno . ') ' .
+                    $this->preparedStatementObject->error), $this->preparedStatementObject->errno);
+
+                return false;
+            }
+
+            return true;
         }
-
-
-
-        return true;
     }
 
 
@@ -236,10 +296,45 @@ class Connection
             return false; //Execute only if the execution not stop
         }
 
-        while ($obj = $this->resultSet->fetch_object()) {
-            $arrayFetchReturn[] = $obj;
+        if (is_null($this->preparedStatementObject)) {
+            while ($obj = $this->resultSet->fetch_object()) {
+                $arrayFetchReturn[] = $obj;
+            }
+
+            return $arrayFetchReturn;
         }
 
-        return $arrayFetchReturn;
+        $result = $this->returnPreparedStatementFetchValues();
+        $this->clearPreparedStatement();
+        return $result;
+    }
+
+    /**
+     * Clear the prepared Statement Object
+     */
+    public function clearPreparedStatement()
+    {
+        $this->preparedStatementObject = null;
+    }
+
+    private function returnPreparedStatementFetchValues()
+    {
+
+        $result = array();
+        $meta = $this->preparedStatementObject->result_metadata();
+        while ($field = $meta->fetch_field()) {
+            $params[] = &$row[$field->name];
+        }
+
+        call_user_func_array(array($this->preparedStatementObject, 'bind_result'), $params);
+
+        while ($this->preparedStatementObject->fetch()) {
+            foreach ($row as $key => $val) {
+                $c[$key] = $val;
+            }
+            $result[] = (object)$c;
+        }
+
+        return $result;
     }
 }
