@@ -85,6 +85,20 @@ The code is checked by the project [PHP Mess Detector](https://phpmd.org/) and [
 
 ?>
 ```   
+
+**Example 4 - Escapes special characters in an SQL:**    
+
+``` php
+<?php
+    
+    //...
+    
+    $connection->start();
+    $string_escape = $connection->getEscapeString($string);
+    
+    //...
+?>
+```
     
 ###Instalation
 
