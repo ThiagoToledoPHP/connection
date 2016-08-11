@@ -11,4 +11,6 @@ php:
   - 7.0
 script:
   - ./vendor/bin/phpunit
-after_script: ./codeclimate.sh
+addons:
+    code_climate:
+        repo_token: 026c5d9d15ca3c41944a1f8b8527adc3e43d723a6b7fa8a693be7ed75758e0f8
