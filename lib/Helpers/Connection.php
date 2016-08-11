@@ -272,12 +272,12 @@ class Connection
             $this->preparedStatementObject = $this->mysqliObject->stmt_init();
 
             if ($this->preparedStatementObject->prepare($query) === false) {
-                $error_msg = "Class Connection -- Method createPreparedStatement -- ";
-                $error_msg .= "Error number: ".$this->preparedStatementObject->errno." -- ";
-                $error_msg .= "Error description: ".$this->preparedStatementObject->error." -- ";
-                $error_msg .= "Wrong SQL: ".$query;
+                $errorMsg = "Class Connection -- Method createPreparedStatement -- ";
+                $errorMsg .= "Error number: ".$this->preparedStatementObject->errno." -- ";
+                $errorMsg .= "Error description: ".$this->preparedStatementObject->error." -- ";
+                $errorMsg .= "Wrong SQL: ".$query;
 
-                $this->createCustomError(utf8_encode($error_msg), $this->preparedStatementObject->errno, "alert");
+                $this->createCustomError(utf8_encode($errorMsg), $this->preparedStatementObject->errno, "alert");
 
                 return false;
             }
@@ -294,19 +294,19 @@ class Connection
                 return true;
             }
 
-            $error_msg = "Class Connection -- Method createPreparedStatement -- ";
-            $error_msg .= "Error number: 0005 -- ";
-            $error_msg .= "Error description: Is necessary equal numbers of elements in valuesArray param and 
+            $errorMsg = "Class Connection -- Method createPreparedStatement -- ";
+            $errorMsg .= "Error number: 0005 -- ";
+            $errorMsg .= "Error description: Is necessary equal numbers of elements in valuesArray param and 
             types string param.";
 
-            $this->createCustomError(utf8_encode($error_msg), "00005", "alert");
+            $this->createCustomError(utf8_encode($errorMsg), "00005", "alert");
 
             return false;
         }
 
-        $error_msg = "Class Connection -- Method createPreparedStatement -- ";
-        $error_msg .= " This method only can be user after use the start Connection method and sucess connect to DB.";
-        $this->createCustomError($error_msg, "00007", "alert");
+        $errorMsg = "Class Connection -- Method createPreparedStatement -- ";
+        $errorMsg .= " This method only can be user after use the start Connection method and sucess connect to DB.";
+        $this->createCustomError($errorMsg, "00007", "alert");
     }
 
     /**
@@ -324,10 +324,10 @@ class Connection
         if ($mysqli->connect_error) {
             $this->isConnected = false;
 
-            $error_msg = "Class Connection -- Method start -- ";
-            $error_msg .= "Error number: ".$mysqli->connect_errno." -- ";
-            $error_msg .= "Error message: ".$mysqli->connect_error;
-            $this->createCustomError($error_msg, $mysqli->connect_errno, "emergency");
+            $errorMsg = "Class Connection -- Method start -- ";
+            $errorMsg .= "Error number: ".$mysqli->connect_errno." -- ";
+            $errorMsg .= "Error message: ".$mysqli->connect_error;
+            $this->createCustomError($errorMsg, $mysqli->connect_errno, "emergency");
 
             return $this->isConnected;
         }
@@ -339,10 +339,10 @@ class Connection
         if (mysqli_connect_error()) {
             $this->isConnected = false;
 
-            $error_msg = "Class Connection -- Method start -- ";
-            $error_msg .= "Error number: ".mysqli_connect_errno()." -- ";
-            $error_msg .= "Error message: ".mysqli_connect_error();
-            $this->createCustomError($error_msg, mysqli_connect_errno(), "emergency");
+            $errorMsg = "Class Connection -- Method start -- ";
+            $errorMsg .= "Error number: ".mysqli_connect_errno()." -- ";
+            $errorMsg .= "Error message: ".mysqli_connect_error();
+            $this->createCustomError($errorMsg, mysqli_connect_errno(), "emergency");
 
             return $this->isConnected;
         }
@@ -361,10 +361,10 @@ class Connection
 
         //Verify if the class is success connected
         if ($this->isConnected === false) {
-            $error_msg = "Class Connection -- Method stop -- ";
-            $error_msg .= " This method only can be user after use the start Connection method ";
-            $error_msg .= "and success connect to DB.";
-            $this->createCustomError($error_msg, "00001", "alert");
+            $errorMsg = "Class Connection -- Method stop -- ";
+            $errorMsg .= " This method only can be user after use the start Connection method ";
+            $errorMsg .= "and success connect to DB.";
+            $this->createCustomError($errorMsg, "00001", "alert");
 
             return false;
         }
@@ -395,10 +395,10 @@ class Connection
 
         //Verify if the class is success connected
         if ($this->isConnected === false) {
-            $error_msg = "Class Connection -- Method executeQuery -- ";
-            $error_msg .= " This method only can be user after use the start Connection method ";
-            $error_msg .= "and success connect to DB.";
-            $this->createCustomError($error_msg, "00002", "alert");
+            $errorMsg = "Class Connection -- Method executeQuery -- ";
+            $errorMsg .= " This method only can be user after use the start Connection method ";
+            $errorMsg .= "and success connect to DB.";
+            $this->createCustomError($errorMsg, "00002", "alert");
 
             return false;
         }
@@ -410,10 +410,10 @@ class Connection
             $this->resultSet = $this->mysqliObject->query($sql);
 
             if ($this->resultSet === false) {
-                $error_msg = "Class Connection -- Method executeQuery -- ";
-                $error_msg .= "Error number: ".$this->mysqliObject->errno." -- ";
-                $error_msg .= "Error message: ".$this->mysqliObject->error;
-                $this->createCustomError($error_msg, $this->mysqliObject->errno, "alert");
+                $errorMsg = "Class Connection -- Method executeQuery -- ";
+                $errorMsg .= "Error number: ".$this->mysqliObject->errno." -- ";
+                $errorMsg .= "Error message: ".$this->mysqliObject->error;
+                $this->createCustomError($errorMsg, $this->mysqliObject->errno, "alert");
 
                 return false;
             }
@@ -424,10 +424,10 @@ class Connection
         $this->resultSet = $this->preparedStatementObject->execute();
 
         if ($this->resultSet === false) {
-            $error_msg = "Class Connection -- Method executeQuery -- ";
-            $error_msg .= "Error number: ".$this->preparedStatementObject->errno." -- ";
-            $error_msg .= "Error message: Prepared Statement - ".$this->preparedStatementObject->error;
-            $this->createCustomError($error_msg, $this->preparedStatementObject->errno, "alert");
+            $errorMsg = "Class Connection -- Method executeQuery -- ";
+            $errorMsg .= "Error number: ".$this->preparedStatementObject->errno." -- ";
+            $errorMsg .= "Error message: Prepared Statement - ".$this->preparedStatementObject->error;
+            $this->createCustomError($errorMsg, $this->preparedStatementObject->errno, "alert");
 
             return false;
         }
@@ -447,10 +447,10 @@ class Connection
 
         //Check if the result set exists
         if (is_null($this->resultSet)) {
-            $error_msg = "Class Connection -- Method getResultSetFetchArrayObjects -- ";
-            $error_msg .= " No is possible fetch a query if you no begin using ";
-            $error_msg .= "Connection:executeQuery to 'SELECT query' in sequence.";
-            $this->createCustomError($error_msg, "00003", "alert");
+            $errorMsg = "Class Connection -- Method getResultSetFetchArrayObjects -- ";
+            $errorMsg .= " No is possible fetch a query if you no begin using ";
+            $errorMsg .= "Connection:executeQuery to 'SELECT query' in sequence.";
+            $this->createCustomError($errorMsg, "00003", "alert");
 
             return false;
         }
