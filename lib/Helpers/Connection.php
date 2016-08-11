@@ -76,19 +76,19 @@ class Connection
     private function verifyTypeMismatch($type, $methodName, $paramName, $paramValue)
     {
         if ($type == "string" && !is_string($paramValue)) {
-            $error_msg = "Class Connection -- Method $methodName -- Param string $paramName Type Mismatch.";
-            $error_msg .= " Details: [".var_export($paramValue, true)."].";
-            $this->createCustomError($error_msg, "00006", "alert");
+            $errorMsg = "Class Connection -- Method $methodName -- Param string $paramName Type Mismatch.";
+            $errorMsg .= " Details: [".var_export($paramValue, true)."].";
+            $this->createCustomError($errorMsg, "00006", "alert");
             return false;
         } elseif ($type == "boolean" && !is_bool($paramValue)) {
-            $error_msg = "Class Connection -- Method $methodName -- Param boolean $paramName Type Mismatch.";
-            $error_msg .= " Details: [".var_export($paramValue, true)."].";
-            $this->createCustomError($error_msg, "00006", "alert");
+            $errorMsg = "Class Connection -- Method $methodName -- Param boolean $paramName Type Mismatch.";
+            $errorMsg .= " Details: [".var_export($paramValue, true)."].";
+            $this->createCustomError($errorMsg, "00006", "alert");
             return false;
         } elseif ($type == "object" && !is_object($paramValue)) {
-            $error_msg = "Class Connection -- Method $methodName -- Param object $paramName Type Mismatch.";
-            $error_msg .= " Details: [".var_export($paramValue, true)."].";
-            $this->createCustomError($error_msg, "00006", "alert");
+            $errorMsg = "Class Connection -- Method $methodName -- Param object $paramName Type Mismatch.";
+            $errorMsg .= " Details: [".var_export($paramValue, true)."].";
+            $this->createCustomError($errorMsg, "00006", "alert");
             return false;
         }
         return true;
