@@ -597,22 +597,8 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
             }
 
             /**
-             * Test the createPreparedStatement method errors type missmatch
-             * Param $valuesArray
-             * @depends testcreatePreparedStatementErrorTypeMissmatchParamTypesString
-             * @expectedException Exception
-             */
-            public function testcreatePreparedStatementErrorTypeMissmatchParamValuesArray(){
-
-                $this->obj = new Toledo\Helpers\Connection(TEST_VALID_HOST_BD,TEST_VALID_NAME_BD,TEST_VALID_USER_BD,TEST_VALID_PASS_BD);
-                $this->obj->createPreparedStatement("","",1);
-
-            }
-
-            /**
              * Test the createPreparedStatement method errors sequence methods
              * This method can't be used with use start method in past
-             * @depends testcreatePreparedStatementErrorTypeMissmatchParamValuesArray
              * @expectedException Exception
              * @expectedExceptionCode 00007
              */

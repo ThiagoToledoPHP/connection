@@ -255,7 +255,7 @@ class Connection
      * @param array $valuesArray
      * @return boolean
      */
-    public function createPreparedStatement($query, $typesString, array $valuesArray)
+    public function createPreparedStatement($query, $typesString, $valuesArray)
     {
 
         //Verify param Type mismatch
