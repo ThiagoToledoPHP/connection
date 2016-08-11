@@ -13,7 +13,8 @@
 	"require-dev": {
 		"phpunit/phpunit": "4.0",
 		"psr/log": "dev-master",
-		"monolog/monolog": "1.21.0"
+		"monolog/monolog": "1.21.0",
+		"codeclimate/php-test-reporter": "v0.3.2"
 	},
 	"autoload": {
 		"psr-4": {
