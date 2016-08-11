@@ -424,9 +424,9 @@ class Connection
         $this->resultSet = $this->preparedStatementObject->execute();
 
         if ($this->resultSet === false) {
-            $errorMsg = "Class Connection -- Method executeQuery -- ";
-            $errorMsg .= "Error number: ".$this->preparedStatementObject->errno." -- ";
-            $errorMsg .= "Error message: Prepared Statement - ".$this->preparedStatementObject->error;
+            $errorMsg = "Class Connection -- Method executeQuery --- ";
+            $errorMsg .= "Error number: ".$this->preparedStatementObject->errno." --- ";
+            $errorMsg .= "Error message: Prepared Statement -- ".$this->preparedStatementObject->error;
             $this->createCustomError($errorMsg, $this->preparedStatementObject->errno, "alert");
 
             return false;
