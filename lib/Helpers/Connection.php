@@ -90,6 +90,11 @@ class Connection
             $errorMsg .= " Details: [".var_export($paramValue, true)."].";
             $this->createCustomError($errorMsg, "00006", "alert");
             return false;
+        } elseif ($type == "array" && !is_array($paramValue)) {
+            $errorMsg = "Class Connection -- Method $methodName -- Param array $paramName Type Mismatch.";
+            $errorMsg .= " Details: [".var_export($paramValue, true)."].";
+            $this->createCustomError($errorMsg, "00006", "alert");
+            return false;
         }
         return true;
     }
@@ -263,6 +268,9 @@ class Connection
             return false;
         }
         if (!$this->verifyTypeMismatch("string", "createPreparedStatement", "typesString", $typesString)) {
+            return false;
+        }
+        if (!$this->verifyTypeMismatch("array", "createPreparedStatement", "valuesArray", $valuesArray)) {
             return false;
         }
 

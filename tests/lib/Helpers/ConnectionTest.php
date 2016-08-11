@@ -596,6 +596,34 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
 
             }
 
+
+            /**
+             * Test the createPreparedStatement method errors type missmatch
+             * Param $valuesArray
+             * @depends testcreatePreparedStatementErrorTypeMissmatchParamTypesString
+             * @expectedException Exception
+             * @expectedExceptionCode 00006
+             */
+            public function testcreatePreparedStatementErrorTypeMissmatchParamValuesArray(){
+
+                $lineLogError = 27;
+                $errorNumber = "00006";
+
+                //Create and verify Log error without exception
+                $log = new Logger('connection');
+                $log->pushHandler(new StreamHandler(DIR_LOGS.'/'. LOGS_FILE, Logger::DEBUG));
+                $this->obj = new Toledo\Helpers\Connection(TEST_VALID_HOST_BD,TEST_VALID_NAME_BD,TEST_VALID_USER_BD,TEST_VALID_PASS_BD);
+                $this->obj->setPsrLogObject($log);
+                $this->obj->createPreparedStatement("","",1);
+                $this->assertEquals($this->readFileLine(DIR_LOGS.'/'. LOGS_FILE,$lineLogError,$errorNumber),true);
+
+                //Create a exception
+                $this->obj->setGenerateException(true);
+                $this->obj->createPreparedStatement("","",1);
+
+            }
+
+
             /**
              * Test the createPreparedStatement method errors sequence methods
              * This method can't be used with use start method in past
@@ -604,7 +632,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              */
             public function testcreatePreparedStatementErrorSequence(){
 
-                $lineLogError = 27;
+                $lineLogError = 29;
                 $errorNumber = "00007";
 
                 //Create and verify Log error without exception
@@ -628,7 +656,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              */
             public function testcreatePreparedStatementErrorInvalidQUery(){
 
-                $lineLogError = 29;
+                $lineLogError = 31;
                 $errorMessage = "Wrong SQL";
 
                 //Create and verify Log error without exception
@@ -658,7 +686,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              */
             public function testStartErrorInvalidConnection(){
 
-                $lineLogError = 31;
+                $lineLogError = 33;
                 $errorMessage = "Class Connection -- Method start -- ";
 
                 //Create and verify Log error without exception
@@ -686,7 +714,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              */
             public function testStopErrorSequence(){
 
-                $lineLogError = 33;
+                $lineLogError = 35;
                 $errorNumber = "00001";
 
                 //Create and verify Log error without exception
@@ -714,7 +742,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              */
             public function testExecuteQueryErrorTypeMissmatchParamSql(){
 
-                $lineLogError = 35;
+                $lineLogError = 37;
                 $errorNumber = "00006";
 
                 //Create and verify Log error without exception
@@ -740,7 +768,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              */
             public function testExecuteQueryErrorSequence(){
 
-                $lineLogError = 37;
+                $lineLogError = 39;
                 $errorNumber = "00002";
 
                 //Create and verify Log error without exception
@@ -764,7 +792,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              */
             public function testExecuteQueryErrorInvalidQuery(){
 
-                $lineLogError = 39;
+                $lineLogError = 41;
                 $errorMessage = "Class Connection -- Method executeQuery -- ";
 
                 //Create and verify Log error without exception
@@ -794,7 +822,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              */
             public function testGetResultSetFetchArrayObjectsErrorSequence(){
 
-                $lineLogError = 41;
+                $lineLogError = 43;
                 $errorNumber = "00003";
 
                 //Create and verify Log error without exception
