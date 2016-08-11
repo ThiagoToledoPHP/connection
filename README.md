@@ -99,6 +99,40 @@ The code is checked by the project [PHP Mess Detector](https://phpmd.org/) and [
     //...
 ?>
 ```
+
+**Example 5 - PSR3 Log class compatibility**
+
+``` php
+<?php
+    
+    //...
+    
+    //You can use Monolog project for example :P
+    $log = new Logger('connection');
+    $log->pushHandler(new StreamHandler("logs/example.log", Logger::DEBUG));
+    $connection = new Toledo\Helpers\Connection("DbHost","DbName","DbUser","DbPass");
+    
+    //This is the new optional method to create this magic
+    $connection->setPsrLogObject($log);
+    
+    //...
+    
+?>
+```
+
+**Example 6 - PSR3 severity info**
+
+``` php
+<?php
+    
+    //Get a string error information about the  severity. 
+    //If info exists, it use PSR3 standards values:
+    //emergency, alert, critical, error, warning, notice, info, debug, log
+    echo $connection->getErrorSeverity();
+    
+?>
+```
+    
     
 ###Instalation
 
