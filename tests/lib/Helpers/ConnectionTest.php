@@ -678,7 +678,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
                 //Create and verify Log error without exception
                 $log = new Logger('connection');
                 $log->pushHandler(new StreamHandler(DIR_LOGS.'/'. LOGS_FILE, Logger::DEBUG));
-                $this->obj = new Toledo\Helpers\Connection(TEST_VALID_HOST_BD,TEST_VALID_NAME_BD,TEST_VALID_USER_BD,TEST_INVALID_PASS_BD);
+                $this->obj = new Toledo\Helpers\Connection(TEST_INVALID_HOST_BD,TEST_INVALID_NAME_BD,TEST_INVALID_USER_BD,TEST_INVALID_PASS_BD);
                 $this->obj->setPsrLogObject($log);
                 $this->obj->start();
                 $this->assertEquals($this->readFileLine(DIR_LOGS.'/'. LOGS_FILE,$lineLogError,$errorMessage),true);
