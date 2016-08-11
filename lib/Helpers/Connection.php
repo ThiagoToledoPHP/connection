@@ -4,6 +4,7 @@
 
     use mysqli;
     use Exception;
+    use LoggerInterface;
 
      //Necessary: by default, PHP will try to load classes from your current namespace
 
@@ -30,16 +31,67 @@ class Connection
     private $generateException; //If you prefer, the class can create one Exception to you use Try/Catch
     private $preparedStatementObject; //internal prepared Statement object.
 
+    //PSR3
+    private $psrLogObject; //internal PSR3 log object to log errors
+    private $errorSeverity; //Severity PSR3 Standards: emergency, alert, critical, error, warning, notice, info, debug
+
+
     /**
      * Connection constructor.
      * @param string $dbHost
      * @param string $dbName
      * @param string $dbUser
      * @param string $dbPass
+     * @return boolean
      */
     public function __construct($dbHost, $dbName, $dbUser, $dbPass)
     {
-        $this->setConnection($dbHost, $dbName, $dbUser, $dbPass);
+        //Verify param Type mismatch
+        if (!$this->verifyTypeMismatch("string", "__construct", "dbHost", $dbHost)) {
+            return false;
+        }
+        if (!$this->verifyTypeMismatch("string", "__construct", "dbName", $dbName)) {
+            return false;
+        }
+        if (!$this->verifyTypeMismatch("string", "__construct", "dbUser", $dbUser)) {
+            return false;
+        }
+        if (!$this->verifyTypeMismatch("string", "__construct", "dbPass", $dbPass)) {
+            return false;
+        }
+
+        return $this->setConnection($dbHost, $dbName, $dbUser, $dbPass);
+    }
+
+    /**
+     * Internal Type Mismatch verify
+     * implemented to increase compatible code :(
+     * More info: http://php.net/manual/pt_BR/functions.arguments.php#functions.arguments.type-declaration
+     * @param string $type
+     * @param string $methodName
+     * @param string $paramName
+     * @param string $paramValue
+     * @return bool
+     */
+    private function verifyTypeMismatch($type, $methodName, $paramName, $paramValue)
+    {
+        if ($type == "string" && !is_string($paramValue)) {
+            $error_msg = "Class Connection -- Method $methodName -- Param string $paramName Type Mismatch.";
+            $error_msg .= " Details: [".var_export($paramValue, true)."].";
+            $this->createCustomError($error_msg, "00006", "alert");
+            return false;
+        } elseif ($type == "boolean" && !is_bool($paramValue)) {
+            $error_msg = "Class Connection -- Method $methodName -- Param boolean $paramName Type Mismatch.";
+            $error_msg .= " Details: [".var_export($paramValue, true)."].";
+            $this->createCustomError($error_msg, "00006", "alert");
+            return false;
+        } elseif ($type == "object" && !is_object($paramValue)) {
+            $error_msg = "Class Connection -- Method $methodName -- Param object $paramName Type Mismatch.";
+            $error_msg .= " Details: [".var_export($paramValue, true)."].";
+            $this->createCustomError($error_msg, "00006", "alert");
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -54,10 +106,32 @@ class Connection
     /*
      * Set if the class generate or not exceptions
      * @param boolean $generateException
+     * @return boolean
      */
     public function setGenerateException($generateException)
     {
+        //Verify param Type mismatch
+        if (!$this->verifyTypeMismatch("boolean", "setGenerateException", "generateException", $generateException)) {
+            return false;
+        }
+
         $this->generateException = $generateException;
+        return true;
+    }
+
+    /**
+     * Set if the class generate logs with PSR3 Object
+     * @param object $psrLogObject
+     * @return boolean
+     */
+    public function setPsrLogObject($psrLogObject)
+    {
+        //Verify param Type mismatch
+        if (!$this->verifyTypeMismatch("object", "setPsrLogObject", "psrLogObject", $psrLogObject)) {
+            return false;
+        }
+        $this->psrLogObject = $psrLogObject;
+        return true;
     }
 
     /**
@@ -67,6 +141,17 @@ class Connection
     public function getErrorCode()
     {
         return $this->errorCode;
+    }
+
+    /**
+     * Return a error severity, if exists.
+     * Use PSR3 standards values: emergency, alert, critical, error, warning, notice, info, debug, log
+     * more info: http://www.php-fig.org/psr/psr-3/
+     * @return string
+     */
+    public function getErrorSeverity()
+    {
+        return $this->errorSeverity;
     }
 
     /**
@@ -80,10 +165,13 @@ class Connection
 
     /**
      * Return a escape string with mysqli escapes tring
-     * @return string
+     * @return string|boolean
      */
     public function getEscapeString($string)
     {
+        if (!$this->verifyTypeMismatch("string", "getEscapeString", "string", $string)) {
+            return false;
+        }
         return $this->mysqliObject->real_escape_string($string);
     }
 
@@ -94,9 +182,24 @@ class Connection
      * @param string $dbName
      * @param string $dbUser
      * @param string $dbPass
+     * @return boolean
      */
     public function setConnection($dbHost, $dbName, $dbUser, $dbPass)
     {
+
+        //Verify param Type mismatch
+        if (!$this->verifyTypeMismatch("string", "setConnection", "dbHost", $dbHost)) {
+            return false;
+        }
+        if (!$this->verifyTypeMismatch("string", "setConnection", "dbName", $dbName)) {
+            return false;
+        }
+        if (!$this->verifyTypeMismatch("string", "setConnection", "dbUser", $dbUser)) {
+            return false;
+        }
+        if (!$this->verifyTypeMismatch("string", "setConnection", "dbPass", $dbPass)) {
+            return false;
+        }
 
         $this->dbHost = $dbHost;
         $this->dbUser = $dbUser;
@@ -111,6 +214,12 @@ class Connection
         $this->isConnected = false;
         $this->resultSet = null;
         $this->preparedStatementObject = null; //Internal Default
+
+        //PSR3
+        $this->psrLogObject = null; //Internal Default
+        $this->errorSeverity = "";
+
+        return true;
     }
 
     /**
@@ -119,57 +228,85 @@ class Connection
      * @param string $errorCode
      * @throws Exception
      */
-    private function createCustomError($errorMsg, $errorCode)
+    private function createCustomError($errorMsg, $errorCode, $errorSeverity)
     {
 
         $this->errorMsg = $errorMsg;
         $this->errorCode = $errorCode;
+        $this->errorSeverity = $errorSeverity;
+
+        if (!is_null($this->psrLogObject)) {
+            $this->psrLogObject->$errorSeverity(strtoupper($errorSeverity)." :: ".$errorCode." :: ".$errorMsg);
+        }
 
         if ($this->generateException === true) {
-            throw new Exception($errorMsg, $errorCode);
+            throw new Exception(strtoupper($errorSeverity)." :: ".$errorMsg, $errorCode);
         }
     }
 
     /**
      * Create prepared Statement using mysqli.
-     * Types String using the mysqli reference: Type specification chars Table in
-     * http://php.net/manual/en/mysqli-stmt.bind-param.php
+     * Types String using the mysqli reference: Type specification chars Table:
+     * s = String, i = Integer, d = Double,  B = Blob
+     * Reference: http://php.net/manual/en/mysqli-stmt.bind-param.php
      *
      * @param string $query
      * @param string $typesString
      * @param array $valuesArray
+     * @return boolean
      */
-    public function createPreparedStatement($query, $typesString, $valuesArray)
+    public function createPreparedStatement($query, $typesString, array $valuesArray)
     {
 
-        $tempParamsArray = array();
-        $this->preparedStatementObject = $this->mysqliObject->stmt_init();
+        //Verify param Type mismatch
+        if (!$this->verifyTypeMismatch("string", "createPreparedStatement", "query", $query)) {
+            return false;
+        }
+        if (!$this->verifyTypeMismatch("string", "createPreparedStatement", "typesString", $typesString)) {
+            return false;
+        }
 
-        if ($this->preparedStatementObject->prepare($query) === false) {
-            $this->createCustomError(utf8_encode('Connect Error - Prepared Statement (' .
-                $this->preparedStatementObject->errno . ') ' .
-                $this->preparedStatementObject->error . ' - Wrong SQL: '
-                .$query), $this->preparedStatementObject->errno);
+        //This method only can be used after the method start create mysqli object
+        if ($this->isConnected === true) {
+            $tempParamsArray = array();
+            $this->preparedStatementObject = $this->mysqliObject->stmt_init();
+
+            if ($this->preparedStatementObject->prepare($query) === false) {
+                $error_msg = "Class Connection -- Method createPreparedStatement -- ";
+                $error_msg .= "Error number: ".$this->preparedStatementObject->errno." -- ";
+                $error_msg .= "Error description: ".$this->preparedStatementObject->error." -- ";
+                $error_msg .= "Wrong SQL: ".$query;
+
+                $this->createCustomError(utf8_encode($error_msg), $this->preparedStatementObject->errno, "alert");
+
+                return false;
+            }
+
+            if (sizeof($valuesArray) == strlen($typesString)) {
+                $tempParamsArray[] = &$typesString;
+                for ($i = 0; $i < sizeof($valuesArray); $i++) {
+                    $tempParamsArray[] = &$valuesArray[$i];
+                }
+
+
+                call_user_func_array(array($this->preparedStatementObject, 'bind_param'), $tempParamsArray);
+
+                return true;
+            }
+
+            $error_msg = "Class Connection -- Method createPreparedStatement -- ";
+            $error_msg .= "Error number: 0005 -- ";
+            $error_msg .= "Error description: Is necessary equal numbers of elements in valuesArray param and 
+            types string param.";
+
+            $this->createCustomError(utf8_encode($error_msg), "00005", "alert");
 
             return false;
         }
 
-        if (sizeof($valuesArray) == strlen($typesString)) {
-            $tempParamsArray[] = &$typesString;
-            for ($i = 0; $i < sizeof($valuesArray); $i++) {
-                $tempParamsArray[] = &$valuesArray[$i];
-            }
-
-
-            call_user_func_array(array($this->preparedStatementObject, 'bind_param'), $tempParamsArray);
-
-            return true;
-        }
-
-        $this->createCustomError("Connection::createPreparedStatement error: Is necessary equal numbers of elements
-        in valuesArray param and types string param. See more in readme file docs", "00005");
-
-        return false;
+        $error_msg = "Class Connection -- Method createPreparedStatement -- ";
+        $error_msg .= " This method only can be user after use the start Connection method and sucess connect to DB.";
+        $this->createCustomError($error_msg, "00007", "alert");
     }
 
     /**
@@ -182,13 +319,15 @@ class Connection
         //Only used @ to total control the report of application
         $mysqli = @new mysqli($this->dbHost, $this->dbUser, $this->dbPass, $this->dbName);
 
-        /*
-         *  $connect_error was broken until PHP 5.2.9 and 5.3.0.
-        */
+
+        //$connect_error was broken until PHP 5.2.9 and 5.3.0.
         if ($mysqli->connect_error) {
             $this->isConnected = false;
-            $this->createCustomError(utf8_encode('Connect Error (' . $mysqli->connect_errno . ') ' .
-                $mysqli->connect_error), $mysqli->connect_errno);
+
+            $error_msg = "Class Connection -- Method start -- ";
+            $error_msg .= "Error number: ".$mysqli->connect_errno." -- ";
+            $error_msg .= "Error message: ".$mysqli->connect_error;
+            $this->createCustomError($error_msg, $mysqli->connect_errno, "emergency");
 
             return $this->isConnected;
         }
@@ -199,8 +338,11 @@ class Connection
          */
         if (mysqli_connect_error()) {
             $this->isConnected = false;
-            $this->createCustomError(utf8_encode('Connect Error (' . mysqli_connect_errno() . ') ' .
-                mysqli_connect_error()), mysqli_connect_errno());
+
+            $error_msg = "Class Connection -- Method start -- ";
+            $error_msg .= "Error number: ".mysqli_connect_errno()." -- ";
+            $error_msg .= "Error message: ".mysqli_connect_error();
+            $this->createCustomError($error_msg, mysqli_connect_errno(), "emergency");
 
             return $this->isConnected;
         }
@@ -217,14 +359,17 @@ class Connection
     public function stop()
     {
 
+        //Verify if the class is success connected
         if ($this->isConnected === false) {
-            //All the number error of this class user 4 zeros in begin
-            $this->createCustomError("Connection::stop error: No is possible close a connection if you 
-            no begin using Connection:start in sequence.", "00001");
+            $error_msg = "Class Connection -- Method stop -- ";
+            $error_msg .= " This method only can be user after use the start Connection method ";
+            $error_msg .= "and success connect to DB.";
+            $this->createCustomError($error_msg, "00001", "alert");
 
             return false;
         }
 
+        //Verify if the use preparedStatement
         if (!is_null($this->preparedStatementObject)) {
             $this->preparedStatementObject->close();
         }
@@ -243,39 +388,51 @@ class Connection
     public function executeQuery($sql = "")
     {
 
+        //Verify param Type mismatch
+        if (!$this->verifyTypeMismatch("string", "executeQuery", "sql", $sql)) {
+            return false;
+        }
+
+        //Verify if the class is success connected
         if ($this->isConnected === false) {
-            //All the number error of this class user 4 zeros in begin
-            $this->createCustomError("Connection::executeQuery error: No is possible execute a query if you no
-             begin using Connection:start in sequence.", "00002");
+            $error_msg = "Class Connection -- Method executeQuery -- ";
+            $error_msg .= " This method only can be user after use the start Connection method ";
+            $error_msg .= "and success connect to DB.";
+            $this->createCustomError($error_msg, "00002", "alert");
 
             return false;
         }
 
+        //No use preparedStatement if is passed one diferent string or prepared statement is enabled
         if (is_null($this->preparedStatementObject) || $sql !== "") {
+            //Clear prepared and create the mysqli query
             $this->clearPreparedStatement();
             $this->resultSet = $this->mysqliObject->query($sql);
 
             if ($this->resultSet === false) {
-                $this->createCustomError(utf8_encode('Connect Error (' . $this->mysqliObject->errno . ') ' .
-                    $this->mysqliObject->error), $this->mysqliObject->errno);
-
-                return false;
-            }
-
-            return true;
-        } else {
-            $this->resultSet = $this->preparedStatementObject->execute();
-
-            if ($this->resultSet === false) {
-                $this->createCustomError(utf8_encode('Connect Error - Prepared Statement (' .
-                    $this->preparedStatementObject->errno . ') ' .
-                    $this->preparedStatementObject->error), $this->preparedStatementObject->errno);
+                $error_msg = "Class Connection -- Method executeQuery -- ";
+                $error_msg .= "Error number: ".$this->mysqliObject->errno." -- ";
+                $error_msg .= "Error message: ".$this->mysqliObject->error;
+                $this->createCustomError($error_msg, $this->mysqliObject->errno, "alert");
 
                 return false;
             }
 
             return true;
         }
+
+        $this->resultSet = $this->preparedStatementObject->execute();
+
+        if ($this->resultSet === false) {
+            $error_msg = "Class Connection -- Method executeQuery -- ";
+            $error_msg .= "Error number: ".$this->preparedStatementObject->errno." -- ";
+            $error_msg .= "Error message: Prepared Statement - ".$this->preparedStatementObject->error;
+            $this->createCustomError($error_msg, $this->preparedStatementObject->errno, "alert");
+
+            return false;
+        }
+
+        return true;
     }
 
 
@@ -288,14 +445,17 @@ class Connection
 
         $arrayFetchReturn = array();
 
+        //Check if the result set exists
         if (is_null($this->resultSet)) {
-            //All the number error of this class user 4 zeros in begin
-            $this->createCustomError("Connection::getResultSetFetchObject error: No is possible fetch a query 
-            if you no begin using Connection:executeQuery to 'SELECT query' in sequence.", "00003");
+            $error_msg = "Class Connection -- Method getResultSetFetchArrayObjects -- ";
+            $error_msg .= " No is possible fetch a query if you no begin using ";
+            $error_msg .= "Connection:executeQuery to 'SELECT query' in sequence.";
+            $this->createCustomError($error_msg, "00003", "alert");
 
-            return false; //Execute only if the execution not stop
+            return false;
         }
 
+        //Check if no use prepared Statements
         if (is_null($this->preparedStatementObject)) {
             while ($obj = $this->resultSet->fetch_object()) {
                 $arrayFetchReturn[] = $obj;
@@ -317,10 +477,16 @@ class Connection
         $this->preparedStatementObject = null;
     }
 
+    /**
+     * Great internal function to return prepared Statements
+     * Thank you  hamidhossain at gmail dot com  for help with initial code :)
+     * @return boolean|array
+     */
     private function returnPreparedStatementFetchValues()
     {
 
         $result = array();
+
         $meta = $this->preparedStatementObject->result_metadata();
         while ($field = $meta->fetch_field()) {
             $params[] = &$row[$field->name];
