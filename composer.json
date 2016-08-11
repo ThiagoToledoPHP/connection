@@ -14,7 +14,7 @@
 		"phpunit/phpunit": "4.0",
 		"psr/log": "dev-master",
 		"monolog/monolog": "1.21.0",
-		"codeclimate/php-test-reporter": "dev-master"
+		"satooshi/php-coveralls": "v1.0.1"
 	},
 	"autoload": {
 		"psr-4": {
