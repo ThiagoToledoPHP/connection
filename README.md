@@ -7,7 +7,7 @@ To check the quality of the source code of the class, was introduced to the serv
 The code is checked by the project [PHP Code Sniffer](http://pear.php.net/package/PHP_CodeSniffer) using [PSR1](http://www.php-fig.org/psr/psr-1/) and [PSR2](http://www.php-fig.org/psr/psr-2/) Standards further increasing the reliability of the class.
 
 
-**Example 1 - Silent mode:**
+**Example 1 - Silent mode:**cc
     
 ``` php
 <?php
@@ -173,8 +173,6 @@ Important references to you understand and study this project:
 [Continuous Integration] <https://en.wikipedia.org/wiki/Continuous_integration>
 
 [TDD] <https://pt.wikipedia.org/wiki/Test_Driven_Development>
-
-[PHP Mess Detector] <https://phpmd.org/>
 
 [PHP Code Sniffer] <http://pear.php.net/package/PHP_CodeSniffer>
 
