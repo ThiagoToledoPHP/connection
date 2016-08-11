@@ -9,7 +9,7 @@ engines:
   fixme:
     enabled: true
   phpmd:
-    enabled: true
+    enabled: false
   phpcodesniffer:
     enabled: true
     config:
