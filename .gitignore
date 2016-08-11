@@ -1,3 +1,4 @@
 vendor/
 .idea/
 tests/ConfigTest.php
+tests/logs/*
