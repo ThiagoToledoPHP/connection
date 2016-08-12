@@ -60,3 +60,12 @@ a:hover{
 .methodDescriptionParamType{
     color:#555555;
 }
+
+ul{
+    list-style: none;
+}
+
+li:before{
+    content: "• ";
+    color:#ff6633;
+}

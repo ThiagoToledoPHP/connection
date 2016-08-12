@@ -32,7 +32,7 @@ $(document).ready(function () {
                     tagLink = " href='" + tagLink + "' ";
                 }
 
-                $("#projectTags").append("<li class='projectTag'><a " + tagLink + " >" + tagName + "</a> :: " + tagDescription +"</li>");
+                $("#projectTags").append("<li class='projectTag'><a " + tagLink + " >" + tagName + "</a> " + tagDescription +"</li>");
 
             })
 
