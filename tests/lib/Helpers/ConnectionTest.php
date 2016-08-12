@@ -248,7 +248,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
             /**
              * Test the __construct method errors type missmatch
              * Param $dbHost
-             * @expectedException Exception
+             * @expectedException InvalidArgumentException
              * @expectedExceptionCode 00006
              */
             public function test__ConstructErrorTypeMissmatchParamDbHost(){
@@ -277,7 +277,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * Test the __construct method errors type missmatch
              * Param $dbName
              * @depends test__ConstructErrorTypeMissmatchParamDbHost
-             * @expectedException Exception
+             * @expectedException InvalidArgumentException
              * @expectedExceptionCode 00006
              */
             public function test__ConstructErrorTypeMissmatchParamDbName(){
@@ -303,7 +303,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * Test the __construct method errors type missmatch
              * Param $dbUser
              * @depends test__ConstructErrorTypeMissmatchParamDbName
-             * @expectedException Exception
+             * @expectedException InvalidArgumentException
              * @expectedExceptionCode 00006
              */
             public function test__ConstructErrorTypeMissmatchParamDbUser(){
@@ -329,7 +329,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * Test the __construct method errors type missmatch
              * Param $dbPass
              * @depends test__ConstructErrorTypeMissmatchParamDbUser
-             * @expectedException Exception
+             * @expectedException InvalidArgumentException
              * @expectedExceptionCode 00006
              */
             public function test__ConstructErrorTypeMissmatchParamDbPass(){
@@ -357,7 +357,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * Test the setGenerateException method errors type missmatch
              * Param $generateException
              * @depends test__ConstructErrorTypeMissmatchParamDbPass
-             * @expectedException Exception
+             * @expectedException InvalidArgumentException
              * @expectedExceptionCode 00006
              */
             public function testSetGenerateExceptionErrorTypeMissmatchParamGenerateException(){
@@ -385,7 +385,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * Test the setPsrLogObject method errors type missmatch
              * Param $psrLogObject
              * @depends testSetGenerateExceptionErrorTypeMissmatchParamGenerateException
-             * @expectedException Exception
+             * @expectedException InvalidArgumentException
              * @expectedExceptionCode 00006
              */
             public function testSetPsrLogObjectErrorTypeMissmatchParamPsrLogObject(){
@@ -413,7 +413,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * Test the getEscapeString method errors type missmatch
              * Param $string
              * @depends testSetPsrLogObjectErrorTypeMissmatchParamPsrLogObject
-             * @expectedException Exception
+             * @expectedException InvalidArgumentException
              * @expectedExceptionCode 00006
              */
             public function testGetEscapeStringErrorTypeMissmatchParamString(){
@@ -441,7 +441,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * Test the setConnection method errors type missmatch
              * Param $dbHost
              * @depends testGetEscapeStringErrorTypeMissmatchParamString
-             * @expectedException Exception
+             * @expectedException InvalidArgumentException
              * @expectedExceptionCode 00006
              */
             public function testSetConnectionErrorTypeMissmatchParamDbHost(){
@@ -468,7 +468,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * Test the setConnection method errors type missmatch
              * Param $dbName
              * @depends testSetConnectionErrorTypeMissmatchParamDbHost
-             * @expectedException Exception
+             * @expectedException InvalidArgumentException
              * @expectedExceptionCode 00006
              */
             public function testSetConnectionErrorTypeMissmatchParamDbName(){
@@ -494,7 +494,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * Test the setConnection method errors type missmatch
              * Param $dbUser
              * @depends testSetConnectionErrorTypeMissmatchParamDbName
-             * @expectedException Exception
+             * @expectedException InvalidArgumentException
              * @expectedExceptionCode 00006
              */
             public function testSetConnectionErrorTypeMissmatchParamDbUser(){
@@ -520,7 +520,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * Test the setConnection method errors type missmatch
              * Param $dbPass
              * @depends testSetConnectionErrorTypeMissmatchParamDbUser
-             * @expectedException Exception
+             * @expectedException InvalidArgumentException
              * @expectedExceptionCode 00006
              */
             public function testSetConnectionErrorTypeMissmatchParamDbPass(){
@@ -548,7 +548,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * Test the createPreparedStatement method errors type missmatch
              * Param $query
              * @depends testSetConnectionErrorTypeMissmatchParamDbPass
-             * @expectedException Exception
+             * @expectedException InvalidArgumentException
              * @expectedExceptionCode 00006
              */
             public function testcreatePreparedStatementErrorTypeMissmatchParamQuery(){
@@ -574,7 +574,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * Test the createPreparedStatement method errors type missmatch
              * Param $typesString
              * @depends testcreatePreparedStatementErrorTypeMissmatchParamQuery
-             * @expectedException Exception
+             * @expectedException InvalidArgumentException
              * @expectedExceptionCode 00006
              */
             public function testcreatePreparedStatementErrorTypeMissmatchParamTypesString(){
@@ -601,7 +601,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * Test the createPreparedStatement method errors type missmatch
              * Param $valuesArray
              * @depends testcreatePreparedStatementErrorTypeMissmatchParamTypesString
-             * @expectedException Exception
+             * @expectedException InvalidArgumentException
              * @expectedExceptionCode 00006
              */
             public function testcreatePreparedStatementErrorTypeMissmatchParamValuesArray(){
@@ -737,7 +737,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase {
              * Test the executeQuery method errors type missmatch
              * Param $sql
              * @depends testStopErrorSequence
-             * @expectedException Exception
+             * @expectedException InvalidArgumentException
              * @expectedExceptionCode 00006
              */
             public function testExecuteQueryErrorTypeMissmatchParamSql(){

@@ -4,7 +4,6 @@
 
     use mysqli;
     use Exception;
-    use LoggerInterface;
 
      //Necessary: by default, PHP will try to load classes from your current namespace
 
@@ -78,22 +77,22 @@ class Connection
         if ($type == "string" && !is_string($paramValue)) {
             $errorMsg = "Class Connection -- Method $methodName -- Param string $paramName Type Mismatch.";
             $errorMsg .= " Details: [".var_export($paramValue, true)."].";
-            $this->createCustomError($errorMsg, "00006", "alert");
+            $this->createCustomError($errorMsg, "00006", "alert", "InvalidArgumentException");
             return false;
         } elseif ($type == "boolean" && !is_bool($paramValue)) {
             $errorMsg = "Class Connection -- Method $methodName -- Param boolean $paramName Type Mismatch.";
             $errorMsg .= " Details: [".var_export($paramValue, true)."].";
-            $this->createCustomError($errorMsg, "00006", "alert");
+            $this->createCustomError($errorMsg, "00006", "alert", "InvalidArgumentException");
             return false;
         } elseif ($type == "object" && !is_object($paramValue)) {
             $errorMsg = "Class Connection -- Method $methodName -- Param object $paramName Type Mismatch.";
             $errorMsg .= " Details: [".var_export($paramValue, true)."].";
-            $this->createCustomError($errorMsg, "00006", "alert");
+            $this->createCustomError($errorMsg, "00006", "alert", "InvalidArgumentException");
             return false;
         } elseif ($type == "array" && !is_array($paramValue)) {
             $errorMsg = "Class Connection -- Method $methodName -- Param array $paramName Type Mismatch.";
             $errorMsg .= " Details: [".var_export($paramValue, true)."].";
-            $this->createCustomError($errorMsg, "00006", "alert");
+            $this->createCustomError($errorMsg, "00006", "alert", "InvalidArgumentException");
             return false;
         }
         return true;
@@ -170,6 +169,7 @@ class Connection
 
     /**
      * Return a escape string with mysqli escapes tring
+     * @param string $string
      * @return string|boolean
      */
     public function getEscapeString($string)
@@ -231,9 +231,11 @@ class Connection
      * Create a custom error. Can create one exception, print and stop application
      * @param string $errorMsg
      * @param string $errorCode
+     * @param string $errorSeverity
+     * @param string $exceptionType
      * @throws Exception
      */
-    private function createCustomError($errorMsg, $errorCode, $errorSeverity)
+    private function createCustomError($errorMsg, $errorCode, $errorSeverity, $exceptionType = "")
     {
 
         $this->errorMsg = $errorMsg;
@@ -245,7 +247,11 @@ class Connection
         }
 
         if ($this->generateException === true) {
-            throw new Exception(strtoupper($errorSeverity)." :: ".$errorMsg, $errorCode);
+            if ($exceptionType == "") {
+                throw new Exception(strtoupper($errorSeverity) . " :: " . $errorMsg, $errorCode);
+            } else {
+                throw new $exceptionType(strtoupper($errorSeverity) . " :: " . $errorMsg, $errorCode);
+            }
         }
     }
 
@@ -315,6 +321,8 @@ class Connection
         $errorMsg = "Class Connection -- Method createPreparedStatement -- ";
         $errorMsg .= " This method only can be user after use the start Connection method and sucess connect to DB.";
         $this->createCustomError($errorMsg, "00007", "alert");
+
+        return false;
     }
 
     /**
