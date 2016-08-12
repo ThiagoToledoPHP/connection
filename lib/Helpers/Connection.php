@@ -1,5 +1,5 @@
 <?php
-
+/** Class Connection- Use to start, stop and execute query in MySql Database*/
     namespace Toledo\Helpers;
 
     use mysqli;
@@ -7,32 +7,66 @@
 
      //Necessary: by default, PHP will try to load classes from your current namespace
 
+
     /**
      * Class Connection
      * Use to start, stop and execute a query in MySql Database.
      * More information in: https://github.com/ThiagoToledoPHP/Connection
+     *
+     * @package Toledo\Helpers
      * @author Thiago Toledo <javaephp@gmail.com>
+     * @link https://github.com/ThiagoToledoPHP/Connection
+     *
      */
 class Connection
 {
 
+    // Database info
+
+    /** @var string $dbHost MySql database host info */
     private $dbHost;
+
+    /** @var string $dbName MySql database name info */
     private $dbName;
+
+    /** @var string $dbUser MySql database user info */
     private $dbUser;
+
+    /** @var string $dbPass MySql database pass info */
     private $dbPass;
 
-    private $mysqliObject; //Mysql Object
-    private $isConnected; //True if the connection start
-    private $errorMsg;   //Save the error msg to create silent Logs, for example
-    private $errorCode; //Save the error code
-    private $resultSet; //Query's  ResultSet
 
-    private $generateException; //If you prefer, the class can create one Exception to you use Try/Catch
-    private $preparedStatementObject; //internal prepared Statement object.
+    // Error info
 
-    //PSR3
-    private $psrLogObject; //internal PSR3 log object to log errors
-    private $errorSeverity; //Severity PSR3 Standards: emergency, alert, critical, error, warning, notice, info, debug
+    /** @var string $errorMsg Error msg to create silent Logs, for example */
+    private $errorMsg;
+
+    /** @var string $errorCode Error code */
+    private $errorCode;
+
+    /** @var string $errorSeverity PSR3: emergency, alert, critical, error, warning, notice, info, debug */
+    private $errorSeverity;
+
+
+    // Internal control properties
+
+    /** @var mysqli $mysqliObject Mysql Object */
+    private $mysqliObject;
+
+    /** @var boolean $isConnected True if the connection start */
+    private $isConnected;
+
+    /** @var \mysqli_result $resultSet Query's  ResultSet */
+    private $resultSet;
+
+    /** @var boolean $generateException If you prefer, the class can create one Exception to you use Try/Catch */
+    private $generateException;
+
+    /** @var \mysqli_stmt $preparedStatementObject Internal prepared Statement object. */
+    private $preparedStatementObject;
+
+    /** @var object $psrLogObject Internal PSR3 object implements LoggerInterface to log errors */
+    private $psrLogObject;
 
 
     /**
@@ -107,7 +141,7 @@ class Connection
         return $this->errorMsg;
     }
 
-    /*
+    /**
      * Set if the class generate or not exceptions
      * @param boolean $generateException
      * @return boolean

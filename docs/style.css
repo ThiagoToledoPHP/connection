@@ -1,0 +1,62 @@
+html{
+    font-family: 'Open Sans', sans-serif;
+    border-left: solid 5px #ff6633;
+}
+
+.projectName{
+    margin-bottom: 5px;
+}
+
+.projectName a{
+    color: #ff6633;
+}
+
+.methodElementName{
+    color: #ff6633;
+}
+
+.projectFullName{
+    color:#555555;
+    font-size:13px;
+    margin-bottom: 30px;
+}
+
+.projectDescription{
+
+}
+
+.methodElement{
+    border-top: solid 1px #555555;
+    margin-top: 50px;
+    padding-top: 10px;
+}
+
+.methodElementNameFullName{
+    color:#2e3436;
+    font-size:13px;
+}
+
+a{
+    color:#555555;
+}
+
+a:hover{
+    color:#ff6633;
+}
+
+.public_method_link{
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#projectTags{
+    margin-bottom: 30px;
+}
+
+.methodDescriptionParamName{
+    color:#ff6633;
+}
+
+.methodDescriptionParamType{
+    color:#555555;
+}

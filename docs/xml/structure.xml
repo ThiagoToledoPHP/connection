@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project title="API Documentation" version="2.8.5">
+  <partials/>
+  <file path="Connection.php" generated-path="Connection.html" hash="61c250700614c88e17fff2edc6e4aa06" package="Default">
+    <docblock line="0">
+      <description>Class Connection- Use to start, stop and execute query in MySql Database</description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <namespace-alias name="mysqli">\mysqli</namespace-alias>
+    <namespace-alias name="Exception">\Exception</namespace-alias>
+    <class final="false" abstract="false" namespace="Toledo\Helpers" line="21" package="Toledo\Helpers">
+      <extends/>
+      <name>Connection</name>
+      <full_name>\Toledo\Helpers\Connection</full_name>
+      <docblock line="21">
+        <description>Class Connection
+Use to start, stop and execute a query in MySql Database.</description>
+        <long-description>More information in: https://github.com/ThiagoToledoPHP/Connection</long-description>
+        <tag name="package" line="21" description="Toledo\Helpers"/>
+        <tag name="author" line="21" description="Thiago Toledo" link="mailto:javaephp@gmail.com"/>
+        <tag name="link" line="21" description="https://github.com/ThiagoToledoPHP/Connection" link="https://github.com/ThiagoToledoPHP/Connection"/>
+      </docblock>
+      <property static="false" visibility="private" namespace="Toledo\Helpers" line="27" package="Toledo\Helpers">
+        <name>$dbHost</name>
+        <full_name>\Toledo\Helpers\Connection::dbHost</full_name>
+        <default></default>
+        <docblock line="27">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="27" description="&lt;p&gt;MySql database host info&lt;/p&gt;" type="string" variable="$dbHost">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" namespace="Toledo\Helpers" line="30" package="Toledo\Helpers">
+        <name>$dbName</name>
+        <full_name>\Toledo\Helpers\Connection::dbName</full_name>
+        <default></default>
+        <docblock line="30">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="30" description="&lt;p&gt;MySql database name info&lt;/p&gt;" type="string" variable="$dbName">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" namespace="Toledo\Helpers" line="33" package="Toledo\Helpers">
+        <name>$dbUser</name>
+        <full_name>\Toledo\Helpers\Connection::dbUser</full_name>
+        <default></default>
+        <docblock line="33">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="33" description="&lt;p&gt;MySql database user info&lt;/p&gt;" type="string" variable="$dbUser">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" namespace="Toledo\Helpers" line="36" package="Toledo\Helpers">
+        <name>$dbPass</name>
+        <full_name>\Toledo\Helpers\Connection::dbPass</full_name>
+        <default></default>
+        <docblock line="36">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="36" description="&lt;p&gt;MySql database pass info&lt;/p&gt;" type="string" variable="$dbPass">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" namespace="Toledo\Helpers" line="42" package="Toledo\Helpers">
+        <name>$errorMsg</name>
+        <full_name>\Toledo\Helpers\Connection::errorMsg</full_name>
+        <default></default>
+        <docblock line="42">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="42" description="&lt;p&gt;Error msg to create silent Logs, for example&lt;/p&gt;" type="string" variable="$errorMsg">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" namespace="Toledo\Helpers" line="45" package="Toledo\Helpers">
+        <name>$errorCode</name>
+        <full_name>\Toledo\Helpers\Connection::errorCode</full_name>
+        <default></default>
+        <docblock line="45">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="45" description="&lt;p&gt;Error code&lt;/p&gt;" type="string" variable="$errorCode">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" namespace="Toledo\Helpers" line="48" package="Toledo\Helpers">
+        <name>$errorSeverity</name>
+        <full_name>\Toledo\Helpers\Connection::errorSeverity</full_name>
+        <default></default>
+        <docblock line="48">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="48" description="&lt;p&gt;PSR3: emergency, alert, critical, error, warning, notice, info, debug&lt;/p&gt;" type="string" variable="$errorSeverity">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" namespace="Toledo\Helpers" line="54" package="Toledo\Helpers">
+        <name>$mysqliObject</name>
+        <full_name>\Toledo\Helpers\Connection::mysqliObject</full_name>
+        <default></default>
+        <docblock line="54">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="54" description="&lt;p&gt;Mysql Object&lt;/p&gt;" type="\mysqli" variable="$mysqliObject">
+            <type>\mysqli</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" namespace="Toledo\Helpers" line="57" package="Toledo\Helpers">
+        <name>$isConnected</name>
+        <full_name>\Toledo\Helpers\Connection::isConnected</full_name>
+        <default></default>
+        <docblock line="57">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="57" description="&lt;p&gt;True if the connection start&lt;/p&gt;" type="boolean" variable="$isConnected">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" namespace="Toledo\Helpers" line="60" package="Toledo\Helpers">
+        <name>$resultSet</name>
+        <full_name>\Toledo\Helpers\Connection::resultSet</full_name>
+        <default></default>
+        <docblock line="60">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="60" description="&lt;p&gt;Query's  ResultSet&lt;/p&gt;" type="\mysqli_result" variable="$resultSet">
+            <type>\mysqli_result</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" namespace="Toledo\Helpers" line="63" package="Toledo\Helpers">
+        <name>$generateException</name>
+        <full_name>\Toledo\Helpers\Connection::generateException</full_name>
+        <default></default>
+        <docblock line="63">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="63" description="&lt;p&gt;If you prefer, the class can create one Exception to you use Try/Catch&lt;/p&gt;" type="boolean" variable="$generateException">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" namespace="Toledo\Helpers" line="66" package="Toledo\Helpers">
+        <name>$preparedStatementObject</name>
+        <full_name>\Toledo\Helpers\Connection::preparedStatementObject</full_name>
+        <default></default>
+        <docblock line="66">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="66" description="&lt;p&gt;Internal prepared Statement object.&lt;/p&gt;" type="\mysqli_stmt" variable="$preparedStatementObject">
+            <type>\mysqli_stmt</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" namespace="Toledo\Helpers" line="69" package="Toledo\Helpers">
+        <name>$psrLogObject</name>
+        <full_name>\Toledo\Helpers\Connection::psrLogObject</full_name>
+        <default></default>
+        <docblock line="69">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="69" description="&lt;p&gt;Internal PSR3 object implements LoggerInterface to log errors&lt;/p&gt;" type="object" variable="$psrLogObject">
+            <type>object</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Toledo\Helpers" line="80" package="Toledo\Helpers">
+        <name>__construct</name>
+        <full_name>\Toledo\Helpers\Connection::__construct()</full_name>
+        <docblock line="80">
+          <description>Connection constructor.</description>
+          <long-description></long-description>
+          <tag name="param" line="80" description="" type="string" variable="$dbHost">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="80" description="" type="string" variable="$dbName">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="80" description="" type="string" variable="$dbUser">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="80" description="" type="string" variable="$dbPass">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="80" description="" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$dbHost</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$dbName</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$dbUser</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$dbPass</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="Toledo\Helpers" line="109" package="Toledo\Helpers">
+        <name>verifyTypeMismatch</name>
+        <full_name>\Toledo\Helpers\Connection::verifyTypeMismatch()</full_name>
+        <docblock line="109">
+          <description>Internal Type Mismatch verify
+implemented to increase compatible code :(
+More info: http://php.net/manual/pt_BR/functions.arguments.php#functions.arguments.type-declaration</description>
+          <long-description></long-description>
+          <tag name="param" line="109" description="" type="string" variable="$type">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="109" description="" type="string" variable="$methodName">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="109" description="" type="string" variable="$paramName">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="109" description="" type="string" variable="$paramValue">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="109" description="" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$type</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$methodName</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$paramName</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$paramValue</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Toledo\Helpers" line="139" package="Toledo\Helpers">
+        <name>getErrorMsg</name>
+        <full_name>\Toledo\Helpers\Connection::getErrorMsg()</full_name>
+        <docblock line="139">
+          <description>Return a error message, if exists.</description>
+          <long-description></long-description>
+          <tag name="return" line="139" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Toledo\Helpers" line="149" package="Toledo\Helpers">
+        <name>setGenerateException</name>
+        <full_name>\Toledo\Helpers\Connection::setGenerateException()</full_name>
+        <docblock line="149">
+          <description>Set if the class generate or not exceptions</description>
+          <long-description></long-description>
+          <tag name="param" line="149" description="" type="boolean" variable="$generateException">
+            <type>boolean</type>
+          </tag>
+          <tag name="return" line="149" description="" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$generateException</name>
+          <default></default>
+          <type>boolean</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Toledo\Helpers" line="165" package="Toledo\Helpers">
+        <name>setPsrLogObject</name>
+        <full_name>\Toledo\Helpers\Connection::setPsrLogObject()</full_name>
+        <docblock line="165">
+          <description>Set if the class generate logs with PSR3 Object</description>
+          <long-description></long-description>
+          <tag name="param" line="165" description="" type="object" variable="$psrLogObject">
+            <type>object</type>
+          </tag>
+          <tag name="return" line="165" description="" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$psrLogObject</name>
+          <default></default>
+          <type>object</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Toledo\Helpers" line="179" package="Toledo\Helpers">
+        <name>getErrorCode</name>
+        <full_name>\Toledo\Helpers\Connection::getErrorCode()</full_name>
+        <docblock line="179">
+          <description>Return a error number, if exists.</description>
+          <long-description></long-description>
+          <tag name="return" line="179" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Toledo\Helpers" line="190" package="Toledo\Helpers">
+        <name>getErrorSeverity</name>
+        <full_name>\Toledo\Helpers\Connection::getErrorSeverity()</full_name>
+        <docblock line="190">
+          <description>Return a error severity, if exists.</description>
+          <long-description>Use PSR3 standards values: emergency, alert, critical, error, warning, notice, info, debug, log
+more info: http://www.php-fig.org/psr/psr-3/</long-description>
+          <tag name="return" line="190" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Toledo\Helpers" line="199" package="Toledo\Helpers">
+        <name>isConnected</name>
+        <full_name>\Toledo\Helpers\Connection::isConnected()</full_name>
+        <docblock line="199">
+          <description>Return a true, if connected</description>
+          <long-description></long-description>
+          <tag name="return" line="199" description="" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Toledo\Helpers" line="209" package="Toledo\Helpers">
+        <name>getEscapeString</name>
+        <full_name>\Toledo\Helpers\Connection::getEscapeString()</full_name>
+        <docblock line="209">
+          <description>Return a escape string with mysqli escapes tring</description>
+          <long-description></long-description>
+          <tag name="param" line="209" description="" type="string" variable="$string">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="209" description="" type="string|boolean">
+            <type>string</type>
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$string</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Toledo\Helpers" line="226" package="Toledo\Helpers">
+        <name>setConnection</name>
+        <full_name>\Toledo\Helpers\Connection::setConnection()</full_name>
+        <docblock line="226">
+          <description>Set the connection, if you need</description>
+          <long-description></long-description>
+          <tag name="param" line="226" description="" type="string" variable="$dbHost">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="226" description="" type="string" variable="$dbName">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="226" description="" type="string" variable="$dbUser">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="226" description="" type="string" variable="$dbPass">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="226" description="" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$dbHost</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$dbName</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$dbUser</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$dbPass</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="Toledo\Helpers" line="272" package="Toledo\Helpers">
+        <name>createCustomError</name>
+        <full_name>\Toledo\Helpers\Connection::createCustomError()</full_name>
+        <docblock line="272">
+          <description>Create a custom error. Can create one exception, print and stop application</description>
+          <long-description></long-description>
+          <tag name="param" line="272" description="" type="string" variable="$errorMsg">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="272" description="" type="string" variable="$errorCode">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="272" description="" type="string" variable="$errorSeverity">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="272" description="" type="string" variable="$exceptionType">
+            <type>string</type>
+          </tag>
+          <tag name="throws" line="272" description="" type="\Exception">
+            <type>\Exception</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$errorMsg</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$errorCode</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$errorSeverity</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$exceptionType</name>
+          <default>""</default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Toledo\Helpers" line="303" package="Toledo\Helpers">
+        <name>createPreparedStatement</name>
+        <full_name>\Toledo\Helpers\Connection::createPreparedStatement()</full_name>
+        <docblock line="303">
+          <description>Create prepared Statement using mysqli.</description>
+          <long-description>Types String using the mysqli reference: Type specification chars Table:
+s = String, i = Integer, d = Double,  B = Blob
+Reference: http://php.net/manual/en/mysqli-stmt.bind-param.php</long-description>
+          <tag name="param" line="303" description="" type="string" variable="$query">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="303" description="" type="string" variable="$typesString">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="303" description="" type="array" variable="$valuesArray">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="303" description="" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$query</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$typesString</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$valuesArray</name>
+          <default></default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Toledo\Helpers" line="366" package="Toledo\Helpers">
+        <name>start</name>
+        <full_name>\Toledo\Helpers\Connection::start()</full_name>
+        <docblock line="366">
+          <description>Start the Database connection</description>
+          <long-description></long-description>
+          <tag name="return" line="366" description="" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Toledo\Helpers" line="409" package="Toledo\Helpers">
+        <name>stop</name>
+        <full_name>\Toledo\Helpers\Connection::stop()</full_name>
+        <docblock line="409">
+          <description>Stop the Database connection. Return true only if sucess stop the currently connection.</description>
+          <long-description></long-description>
+          <tag name="return" line="409" description="" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Toledo\Helpers" line="438" package="Toledo\Helpers">
+        <name>executeQuery</name>
+        <full_name>\Toledo\Helpers\Connection::executeQuery()</full_name>
+        <docblock line="438">
+          <description>Execute a query in Database. Return true in sucess</description>
+          <long-description></long-description>
+          <tag name="param" line="438" description="" type="string" variable="$sql">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="438" description="" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$sql</name>
+          <default>""</default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Toledo\Helpers" line="493" package="Toledo\Helpers">
+        <name>getResultSetFetchArrayObjects</name>
+        <full_name>\Toledo\Helpers\Connection::getResultSetFetchArrayObjects()</full_name>
+        <docblock line="493">
+          <description>Use only after executeQuery with 'SELECT SQLs', create a array of objects, or false in error</description>
+          <long-description></long-description>
+          <tag name="return" line="493" description="" type="array|boolean">
+            <type>array</type>
+            <type>boolean</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Toledo\Helpers" line="525" package="Toledo\Helpers">
+        <name>clearPreparedStatement</name>
+        <full_name>\Toledo\Helpers\Connection::clearPreparedStatement()</full_name>
+        <docblock line="525">
+          <description>Clear the prepared Statement Object</description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="Toledo\Helpers" line="535" package="Toledo\Helpers">
+        <name>returnPreparedStatementFetchValues</name>
+        <full_name>\Toledo\Helpers\Connection::returnPreparedStatementFetchValues()</full_name>
+        <docblock line="535">
+          <description>Great internal function to return prepared Statements
+Thank you  hamidhossain at gmail dot com  for help with initial code :)</description>
+          <long-description></long-description>
+          <tag name="return" line="535" description="" type="boolean|array">
+            <type>boolean</type>
+            <type>array</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <source>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</source>
+  </file>
+  <package name="Default" full_name="Default"/>
+  <package name="Toledo" full_name="Toledo">
+    <package name="Helpers" full_name="Toledo\Helpers"/>
+  </package>
+  <package name="global" full_name="global"/>
+  <namespace name="Toledo" full_name="Toledo">
+    <namespace name="Helpers" full_name="Toledo\Helpers"/>
+  </namespace>
+  <deprecated count="0"/>
+</project>
