@@ -62,7 +62,6 @@ $(document).ready(function () {
                     if(i != 0){
                         if(larguraJanela>400) {
                             htmlPublicMethods += ", ";
-                            $(".ancora_top").show();
                         }else{
                             htmlPublicMethods += "<br>";
                         }
@@ -117,6 +116,10 @@ $(document).ready(function () {
             $("#publicMethods").append(htmlPublicMethods);
             $("#methodsBlock").append(htmlMethodsBlock);
             $("#mainBlock").fadeIn("slow");
+
+            if(larguraJanela>400) {
+                $(".ancora_top").fadeIn("slow");
+            }
 
         },
         error: function () {
