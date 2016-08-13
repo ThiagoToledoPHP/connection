@@ -27,7 +27,7 @@ html{
 }
 
 .methodElement{
-    border-top: solid 1px #555555;
+    border-top: solid 1px #eaebe6;
     margin-top: 50px;
     padding-top: 10px;
 }
@@ -89,4 +89,9 @@ ul{
 li:before{
     content: "• ";
     color:#ff6633;
+}
+
+#publicMethods{
+    padding-top: 30px;
+    border-top: solid 1px #eaebe6;
 }
