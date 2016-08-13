@@ -115,7 +115,7 @@ $(document).ready(function () {
 
             $("#publicMethods").append(htmlPublicMethods);
             $("#methodsBlock").append(htmlMethodsBlock);
-
+            $("html").fadeIn("slow");
 
         },
         error: function () {

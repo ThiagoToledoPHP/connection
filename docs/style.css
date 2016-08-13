@@ -4,6 +4,7 @@ html{
     word-wrap: break-word;
     font-style: italic;
     color: #333;
+    display: none;
 }
 
 .projectName{
