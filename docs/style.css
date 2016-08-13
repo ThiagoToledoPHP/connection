@@ -53,6 +53,21 @@ a:hover{
     font-weight: bold;
 }
 
+.public_method_link:hover{
+    text-decoration: underline;
+}
+
+.public_method_link2{
+    text-decoration: none;
+    font-weight: bold;
+    color:#ff6633;
+}
+
+.public_method_link2:hover{
+    color:#555555;
+    text-decoration: underline;
+}
+
 #projectTags{
     margin-bottom: 30px;
 }

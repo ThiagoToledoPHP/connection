@@ -59,7 +59,15 @@ $(document).ready(function () {
                         htmlPublicMethods += ", ";
                     }
 
-                    htmlPublicMethods += "&nbsp;&nbsp;&nbsp;<a href='#" + methodName + "' class='public_method_link' >" + methodName + "</a>";
+                    var resto = (i + 1) % 2;
+                    var classeCss = "";
+                    if(resto == 0){
+                        classeCss = "public_method_link";
+                    }else{
+                        classeCss = "public_method_link2";
+                    }
+
+                    htmlPublicMethods += " <a href='#" + methodName + "' class='" + classeCss + "' >" + methodName + "</a>";
 
                     i++;
                 }
