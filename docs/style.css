@@ -1,6 +1,7 @@
 html{
     font-family: 'Open Sans', sans-serif;
     border-left: solid 5px #ff6633;
+    word-wrap: break-word;
 }
 
 .projectName{
