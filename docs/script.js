@@ -56,10 +56,10 @@ $(document).ready(function () {
                 if(visibility==="public"){
 
                     if(i != 0){
-                        htmlPublicMethods += ", &nbsp;&nbsp;&nbsp;";
+                        htmlPublicMethods += ", ";
                     }
 
-                    htmlPublicMethods += "<a href='#" + methodName + "' class='public_method_link' >" + methodName + "</a>";
+                    htmlPublicMethods += "&nbsp;&nbsp;&nbsp;<a href='#" + methodName + "' class='public_method_link' >" + methodName + "</a>";
 
                     i++;
                 }
