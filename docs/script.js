@@ -33,8 +33,11 @@ $(document).ready(function () {
                     tagLink = " href='" + tagLink + "' ";
                 }
 
-                $("#projectTags").append("<li class='projectTag'><a " + tagLink + " >" + tagName + "</a> " + tagDescription +"</li>");
-
+                if(tagName !== "link"){
+                    $("#projectTags").append("<li class='projectTag'><a " + tagLink + " >" + tagName + "</a> " + tagDescription +"</li>");
+                }else{
+                    $("#projectTags").append("<li class='projectTag'><a " + tagLink + " >" + tagName + "</a></li>");
+                }
             })
 
             var htmlPublicMethods = "";
@@ -53,7 +56,7 @@ $(document).ready(function () {
                 if(visibility==="public"){
 
                     if(i != 0){
-                        htmlPublicMethods += ", ";
+                        htmlPublicMethods += ", &nbsp;&nbsp;&nbsp;";
                     }
 
                     htmlPublicMethods += "<a href='#" + methodName + "' class='public_method_link' >" + methodName + "</a>";
