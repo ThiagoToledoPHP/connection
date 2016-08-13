@@ -62,6 +62,7 @@ $(document).ready(function () {
                     if(i != 0){
                         if(larguraJanela>400) {
                             htmlPublicMethods += ", ";
+                            $(".ancora_top").show();
                         }else{
                             htmlPublicMethods += "<br>";
                         }

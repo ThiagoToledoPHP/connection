@@ -134,6 +134,7 @@ li:before{
     padding: 0 2px;
     text-decoration: none;
     margin-bottom: 1px;
+    display: none;
 }
 
 #mainBlock{
