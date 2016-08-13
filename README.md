@@ -149,6 +149,9 @@ Using in your [composer.json](https://getcomposer.org/doc/01-basic-usage.md#comp
 }
 ```
     
+###Detail documentation
+Access information about all class public methods **[click here](https://rawgit.com/ThiagoToledoPHP/Connection/master/docs/index.html)** or access with browser the docs directory.
+    
 ###Notice
   
 _I created this class to study [Composer] , [Packagist] , [TDD] with [PHPUnit] , [PSR] , [MySQLi] and [Continuous Integration] .
