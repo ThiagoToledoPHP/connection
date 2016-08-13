@@ -86,7 +86,8 @@ $(document).ready(function () {
                     var methodReturn = "void";
 
                     htmlMethodsBlock += "<div class='methodElement'>";
-                        htmlMethodsBlock += "<h2 class='methodElementName'>" + methodName + " <a name='" + methodName + "'></a></h2>";
+                        htmlMethodsBlock += "<a name='" + methodName + "'></a>";
+                        htmlMethodsBlock += "<h2 class='methodElementName'>" + methodName + "<a href='#' class='ancora_top'>^</a> </h2> ";
                         htmlMethodsBlock += "<p class='methodElementNameFullName'>" + methodFullName + "</p>";
                         htmlMethodsBlock += "<p class='methodDescription'>" + methodDescription + "</p>";
                         htmlMethodsBlock += "<ul>";

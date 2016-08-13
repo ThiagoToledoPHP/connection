@@ -12,6 +12,7 @@ html{
 
 .projectName a{
     color: #ff6633;
+    font-style: normal;
 }
 
 .methodElementName{
@@ -119,4 +120,18 @@ li:before{
 
 .methodDescription{
     color:#ff6633;
+    font-style: normal;
+}
+
+.ancora_top{
+    border: 1px solid #ccc;
+    color: #ccc;
+    display: inline-block;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+    margin-left: 16px;
+    padding: 0 2px;
+    text-decoration: none;
+    margin-bottom: 1px;
 }
