@@ -8,11 +8,14 @@ $(document).ready(function () {
             //console.log($(xml).find('namespace-alias').text());
             //console.log($(xml).find('file').find('class').find('name').text());
 
-            projectName = $(xml).find('file').children('class').children('name').text();
-            projectFullName = $(xml).find('file').children('class').children('full_name').text();
-            projectDescription = $(xml).find('file').children('class').children('docblock').children('description').text();
-            projectTags = $(xml).find('file').children('class').children('docblock').children('tag');
-            methods = $(xml).find('file').children('class').children('method');
+            var projectName = $(xml).find('file').children('class').children('name').text();
+            var projectFullName = $(xml).find('file').children('class').children('full_name').text();
+            var projectDescription = $(xml).find('file').children('class').children('docblock').children('description').text();
+            var projectTags = $(xml).find('file').children('class').children('docblock').children('tag');
+            var methods = $(xml).find('file').children('class').children('method');
+            var larguraJanela = $(window).width();
+
+            //alert(larguraJanela);
 
             $("#projectNameLink").text(projectName);
             $("title").text(projectName);
@@ -55,8 +58,13 @@ $(document).ready(function () {
                 //Public Methods links - top
                 if(visibility==="public"){
 
+
                     if(i != 0){
-                        htmlPublicMethods += ", ";
+                        if(larguraJanela>400) {
+                            htmlPublicMethods += ", ";
+                        }else{
+                            htmlPublicMethods += "<br>";
+                        }
                     }
 
                     var resto = (i + 1) % 2;
