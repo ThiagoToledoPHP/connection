@@ -4,7 +4,6 @@ html{
     word-wrap: break-word;
     font-style: italic;
     color: #333;
-    display: none;
 }
 
 .projectName{
@@ -135,4 +134,8 @@ li:before{
     padding: 0 2px;
     text-decoration: none;
     margin-bottom: 1px;
+}
+
+#mainBlock{
+    display: none;
 }
