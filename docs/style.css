@@ -51,6 +51,7 @@ a:hover{
 .public_method_link{
     text-decoration: none;
     font-weight: bold;
+    margin-top: 8px;
 }
 
 .public_method_link:hover{
@@ -61,6 +62,7 @@ a:hover{
     text-decoration: none;
     font-weight: bold;
     color:#ff6633;
+    margin-top: 8px;
 }
 
 .public_method_link2:hover{
