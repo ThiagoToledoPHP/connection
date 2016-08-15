@@ -53,6 +53,7 @@ $(document).ready(function () {
                 var methodName = method.children('name').text();
                 var methodFullName = method.children('full_name').text();
                 var methodDescription = method.children('docblock').children('description').text();
+                var methodLongDescription = method.children('docblock').children('long-description').text();
                 var methodTags = method.children('docblock').children('tag');
 
                 //Public Methods links - top
@@ -90,6 +91,7 @@ $(document).ready(function () {
                         htmlMethodsBlock += "<h2 class='methodElementName'>" + methodName + "<a href='#' class='ancora_top'>^</a> </h2> ";
                         htmlMethodsBlock += "<p class='methodElementNameFullName'>" + methodFullName + "</p>";
                         htmlMethodsBlock += "<p class='methodDescription'>" + methodDescription + "</p>";
+                        htmlMethodsBlock += "<p class='methodLongDescription'>" + linkify(methodLongDescription) + "</p>";
                         htmlMethodsBlock += "<ul>";
 
                     methodTags.each(function(){
@@ -127,3 +129,11 @@ $(document).ready(function () {
         }
     });
 });
+
+//Thanks http://goo.gl/G77kjA
+function linkify(text) {
+    var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.replace(urlRegex, function(url) {
+        return '<a href="' + url + '" target="_blank">' + url + '</a>';
+    });
+}
